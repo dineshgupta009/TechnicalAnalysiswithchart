@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Option Analysis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Option 1: Include in HTML -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+
+    <style>
+	table {
+	  font-family: arial, sans-serif;
+	  border-collapse: collapse;
+	  width: 100%;
+	  
+	}
+	
+	td, th {
+	  border: 1px solid #dddddd;
+	  text-align: center;
+	  padding: 3px;
+	}
+	
+	div.left {
+	  float:left;
+	  width: 48%;
+	  padding: 5px;
+	  border: 1px solid orange;    
+	}
+	
+	
+	div.right {
+	  float:right;
+	  width: 48%;
+	  padding: 5px;
+	  border: 1px solid yellow;    
+	}
+	
+
+
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary icon-eye">
+    <a th:href="@{/symbol}" class="navbar-brand" href="#"> Options Gainer <i class="bi bi-house-fill"></i></a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span> </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Dropdown link
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div style="position: static ;background-color:#d1dbe2">
+    <div class="left">Nifty : <span id="nifty"></span>
+        <a th:href="@{/BankNiftyPage}">BaniNifty-Chart</a>
+        <a th:href="@{/NiftyPage}">Nifty-Chart</a>
+    </div>
+
+    <div class="right">
+        <div style="display: block;">
+            BankNifty : <span id="banknifty"></span> ExpiryDate :
+            <select name="StrikePrice" id="StrikePrice">
+                <option th:each="exp : ${expiredate}"
+                        th:value="${exp}"
+                        th:text="${exp}"></option>
+            </select>
+            <button>GO</button>
+            <button onclick="callApi()"><i class="fa fa-refresh" style="color:blue;"></i></button>
+            <span id="timestamp"></span>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="left">
+        <div style="font-size:24px;">
+            S1 = <span id='s11'></span> S2 = <span id='s12'></span> S3 = <span id='s13'></span> S4 = <span
+                id='s14'></span> S5 = <span id='s15'></span><br/>
+            R1 = <span id='r11'></span> R2 = <span id='r12'></span> R3 = <span id='r13'></span> R4 = <span
+                id='r14'></span> R5 = <span id='r15'></span>
+        </div>
+        <table id="niftyTable" width="100%">
+            <tr>
+                <th colspan="4" style="background-color:#CCFFFF;">CALLS</th>
+                <th colspan="2"><span id="niftypcr"></span></th>
+                <th colspan="4" style="background-color:#CCFFFF;">PUTS</th>
+            </tr>
+            <tr>
+                <th>OI</th>
+                <th>CHNG IN OI</th>
+                <th>VOLUME</th>
+                <th>IV</th>
+                <th>STRIKE PRICE</th>
+                <th>PCR</th>
+                <th>IV</th>
+                <th>VOLUME</th>
+                <th>CHNG IN OI</th>
+                <th>OI</th>
+            </tr>
+        </table>
+    </div>
+
+    <div class="right">
+        <div style="font-size:24px;">
+            S1 = <span id='s1'></span> S2 = <span id='s2'></span> S3 = <span id='s3'></span> S4 = <span id='s4'></span>
+            S5 = <span id='s5'></span><br/>
+            R1 = <span id='r1'></span> R2 = <span id='r2'></span> R3 = <span id='r3'></span> R4 = <span id='r4'></span>
+            R5 = <span id='r5'></span>
+        </div>
+        <table id="bankniftyTable" width="100%">
+            <tr>
+                <th colspan="4" style="background-color:#CCFFFF;">CALLS</th>
+                <th colspan="2"><span id="bankniftypcr"></span></th>
+                <th colspan="4" style="background-color:#CCFFFF;">PUTS</th>
+            </tr>
+            <tr>
+                <th>OI</th>
+                <th>CHNG IN OI</th>
+                <th>VOLUME</th>
+                <th>IV</th>
+                <th>STRIKE PRICE</th>
+                <th>PCR</th>
+                <th>IV</th>
+                <th>VOLUME</th>
+                <th>CHNG IN OI</th>
+                <th>OI</th>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<script>
+
+	insertRow();
+	getNiftyData();
+	getBankNiftyData()
+	
+	function callApi(){
+		console.log("refereshed");
+		getNiftyData();
+		getBankNiftyData()
+	}
+	
+	function insertRow(){
+		
+		for(var i = 0; i<21;i++){
+			
+		
+		var td=document.getElementById("niftyTable");
+		var row=td.insertRow(-1);
+
+		  var column1 = row.insertCell(0);
+		  var column2 = row.insertCell(1);
+		  var column3 = row.insertCell(2);
+		  var column4 = row.insertCell(3);
+		  var column5 = row.insertCell(4);
+		  var column6 = row.insertCell(5);
+		  var column7 = row.insertCell(6);
+		  var column8 = row.insertCell(7);
+		  var column9 = row.insertCell(8);
+		  var column10 = row.insertCell(9);
+		  
+		  column1.innerHTML ='-';
+		  column2.innerHTML ='-';
+		  column3.innerHTML ='-';
+		  column4.innerHTML ='-';
+		  column5.innerHTML ='-';
+		  column6.innerHTML ='-';
+		  column7.innerHTML ='-';
+		  column8.innerHTML ='-';
+		  column9.innerHTML ='-';
+		  column10.innerHTML ='-';
+		  
+		  td=document.getElementById("bankniftyTable");
+		  row=td.insertRow(-1);
+
+		  column1 = row.insertCell(0);
+			   column2 = row.insertCell(1);
+			   column3 = row.insertCell(2);
+			   column4 = row.insertCell(3);
+			   column5 = row.insertCell(4);
+			  column6 = row.insertCell(5);
+			  column7 = row.insertCell(6);
+			  column8 = row.insertCell(7);
+			  column9 = row.insertCell(8);
+			  column10 = row.insertCell(9);
+			  
+			  column1.innerHTML ='-';
+			  column2.innerHTML ='-';
+			  column3.innerHTML ='-';
+			  column4.innerHTML ='-';
+			  column5.innerHTML ='-';
+			  column6.innerHTML ='-';
+			  column7.innerHTML ='-';
+			  column8.innerHTML ='-';
+			  column9.innerHTML ='-';
+			  column10.innerHTML ='-';
+		}	  
+		  
+	}
+        
+		async function getNiftyData(){
+			console.log('nifty called');
+			  $.get("http://localhost:1255/nifty", function(data, status){
+				  var gfg = JSON.stringify(data);
+				  var obj = JSON.parse(gfg);
+				  processRecords(obj, "niftyTable");
+			    });
+			//  await delay(30000);
+			//  getBankNiftyData();
+		}
+		
+		async function getBankNiftyData(){
+			console.log('banknifty called');
+			  $.get("http://localhost:1255/banknifty", function(data, status){
+				  var gfg = JSON.stringify(data);
+				  var obj = JSON.parse(gfg);
+				  processRecords(obj, "bankniftyTable");
+				  console.log(obj);
+			    });
+			 // await delay(30000);
+			 // getNiftyData();
+		}
+		
+		async function processRecords(object, tableName){
+			deleteRecords(tableName);
+		
+			   if(tableName == "niftyTable"){
+				   
+				   document.getElementById("niftypcr").innerHTML=(object.putTotalOI/object.callTotalOI).toFixed(4);
+				   
+					if(object.underlyingPrice > object.pastUnderlyingPrice){
+				      	document.getElementById('nifty').innerHTML=object.underlyingPrice;
+				      	document.getElementById('nifty').style.backgroundColor='green';
+					}else if(object.underlyingPrice < object.pastUnderlyingPrice){
+						document.getElementById('nifty').innerHTML=object.underlyingPrice;
+				      	document.getElementById('nifty').style.backgroundColor='red';	
+					}else{
+						document.getElementById('nifty').innerHTML=object.underlyingPrice;
+					}
+					
+					const d = new Date();
+					document.getElementById("timestamp").innerHTML = d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+					
+					console.log("put levels nifty -> ");
+					var loop =11;
+				      Object.entries(object.putLevels).map(obj => {
+				    //	   console.log(obj[0]);
+				    	//   console.log(obj[1]);
+				    	   document.getElementById("s"+loop+"").innerHTML = obj[0];
+				    	   loop++;
+				      });
+				      
+
+						console.log("call levels nifty -> ");
+						loop =11;
+					      Object.entries(object.callLevels).map(obj => {
+					    	   console.log(obj[0]);
+					    	   console.log(obj[1]);
+					    	   document.getElementById("r"+loop+"").innerHTML = obj[0];
+					    	   loop++;
+					      }); 
+			   }
+			   
+			   if(tableName == "bankniftyTable"){
+				   
+				   document.getElementById("bankniftypcr").innerHTML=(object.putTotalOI/object.callTotalOI).toFixed(4);
+				   
+					if(object.underlyingPrice > object.pastUnderlyingPrice){
+				      	document.getElementById('banknifty').innerHTML=object.underlyingPrice;
+				      	document.getElementById('banknifty').style.backgroundColor='green';
+					}else if(object.underlyingPrice < object.pastUnderlyingPrice){
+						document.getElementById('banknifty').innerHTML=object.underlyingPrice;
+				      	document.getElementById('banknifty').style.backgroundColor='red';	
+					}else{
+						document.getElementById('banknifty').innerHTML=object.underlyingPrice;
+					}
+					
+					console.log("put levels banknifty -> ");
+					var loop =1;
+				      Object.entries(object.putLevels).map(obj => {
+				    	   console.log(obj[0]);
+				    	   console.log(obj[1]);
+				    	   document.getElementById("s"+loop+"").innerHTML = obj[0];
+				    	   loop++;
+				      });
+				      
+
+						console.log("call levels banknifty -> ");
+						loop =1;
+					      Object.entries(object.callLevels).map(obj => {
+					    	   console.log(obj[0]);
+					    	   console.log(obj[1]);
+					    	   document.getElementById("r"+loop+"").innerHTML = obj[0];
+					    	   loop++;
+					      }); 
+			   }
+			   
+		      var td=document.getElementById(tableName);
+		      for(var i=0;i<object.records.length;i++){
+		      var row=td.insertRow(i+2);
+		        var column1 = row.insertCell(0);
+		        var column2 = row.insertCell(1);
+		        var column3 = row.insertCell(2);
+		        var column4 = row.insertCell(3);
+		        var column5 = row.insertCell(4);
+		        var column6 = row.insertCell(5);
+		        var column7 = row.insertCell(6);
+		        var column8 = row.insertCell(7);
+		        var column9 = row.insertCell(8);
+		        var column10 = row.insertCell(9);
+		        
+		        column1.innerHTML = object.records[i].CE.openInterest;
+		        column1.style.backgroundColor= color(object.records[i].CE.openInterest, object.pastRecords[i].CE.openInterest);
+		        
+		        column2.innerHTML = object.records[i].CE.changeinOpenInterest;
+		        column2.style.backgroundColor= color(object.records[i].CE.changeinOpenInterest, object.pastRecords[i].CE.changeinOpenInterest);
+		        
+		        column3.innerHTML = object.records[i].CE.totalTradedVolume;
+		        
+		        column4.innerHTML =  object.records[i].CE.impliedVolatility;
+		        column4.style.backgroundColor =	color(object.records[i].CE.impliedVolatility, object.pastRecords[i].CE.impliedVolatility);
+		        
+		        column5.innerHTML = object.records[i].strikePrice;
+		        
+		        if(object.records[i].strikePrice == object.currentStrike){
+		        	column5.style.backgroundColor='orange';
+		        }
+		        
+		        var pcr =(object.records[i].PE.openInterest/object.records[i].CE.openInterest).toFixed(2);
+		        
+		        column6.innerHTML = pcr;
+		        if(pcr>0.5){
+		        	column6.style.backgroundColor= "green";	
+		        }
+		        if(pcr<=0.5 && pcr>0){
+		        	column6.style.backgroundColor= "red";	
+		        }
+		        
+		        column7.innerHTML = object.records[i].PE.impliedVolatility;
+		        column7.style.backgroundColor = color(object.records[i].PE.impliedVolatility, object.pastRecords[i].PE.impliedVolatility);
+		        
+		        column8.innerHTML = object.records[i].PE.totalTradedVolume;
+		        
+		        column9.innerHTML = object.records[i].PE.changeinOpenInterest;
+		        column9.style.backgroundColor= color(object.records[i].CE.changeinOpenInterest, object.pastRecords[i].CE.changeinOpenInterest);
+		        
+		        column10.innerHTML = object.records[i].PE.openInterest;
+		        column10.style.backgroundColor= color(object.records[i].CE.openInterest, object.pastRecords[i].CE.openInterest);
+			}
+		}
+		
+		
+		function deleteRecords(table){
+			for(var i = 0; i<21;i++){
+				document.getElementById(table).deleteRow(-1);
+			}
+		}
+		
+		function color(current, past){
+			if(current>past){
+	        	return 'green';
+	        }else if(current<past){
+	        	return 'red';
+	        }else{
+
+	        }
+		}
+		
+		function delay(milliSeconds) 
+		{
+		    return new Promise(resolve => setTimeout(resolve, milliSeconds));
+		}
+
+
+</script>
+
+</body>
+</html>
+	
