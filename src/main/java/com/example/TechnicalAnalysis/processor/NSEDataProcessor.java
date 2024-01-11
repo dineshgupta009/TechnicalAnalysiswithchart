@@ -234,12 +234,9 @@ public class NSEDataProcessor {
                 .filter(data -> (data.getStrikePrice() >= (currentStrike - limit) && data.getStrikePrice() <= (currentStrike + limit)))
                 .collect(Collectors.toList());
 
-
-
         for (Data data : records) {
             putLevels.put(data.getStrikePrice(), (data.getPe().getChangeinOpenInterest()));
             callLevels.put(data.getStrikePrice(), (data.getCe().getChangeinOpenInterest()));
-
         }
 
         Set<Double> keySet = callLevels.keySet();

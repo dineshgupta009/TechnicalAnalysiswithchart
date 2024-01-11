@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,8 +21,8 @@ public class test {
 
     @Autowired
     FeignClientNSENifty nifty;
-//    @Autowired
-//    NSEDataProcessor processor;
+    @Autowired
+    NSEDataProcessor processor;
 
     @GetMapping("/chartStrikePrice")
     public String getStrikePrice(Model model) {
@@ -66,6 +67,21 @@ public class test {
         model.addAttribute("OiCallVal", listOfOiCallValues);
         model.addAttribute("spotPrice",nse.getRecords().getUnderlyingValue());
 
+        List<String> operators =  new ArrayList<>();
+        operators.add("NIFTY");
+        operators.add("BANKNIFTY");
+        model.addAttribute("operators", operators);
+
+//      getting pcr value
+
+       Double putValue =  processor.processNiftyData(nifty.getLiveNiftyData(FeignBuilder.builder()),500,50).getPutTotalOI();
+        Double callValue =  processor.processNiftyData(nifty.getLiveNiftyData(FeignBuilder.builder()),500,50).getCallTotalOI();
+
+        float pcr = Float.parseFloat(String.format("%.2f", (putValue/callValue)));
+
+//        String.format("%.2f", pcr);
+        System.out.println(pcr);
+        model.addAttribute("pcr" ,pcr);
         return "barChart";
     }
 
