@@ -9,21 +9,16 @@
         break;
 
         case "BANKNIFTY":
-        window.location="../asp-tutorial/site_map.php";
+        window.location="http://localhost:1255/FinNiftyPage";
         break;
 
         case "FINNIFTY":
         window.location="http://localhost:1255/chartStrikePrice";
           break;
-          case "JS":
-            window.location="site_map.php";
-        break;
-
-
 
         /// Can be extended to other different selections of SubCategory //////
         default:
-        window.location="http://localhost:1255/symbol"; // if no selection matches then redirected to home page
+        window.location="http://localhost:1255/index"; // if no selection matches then redirected to home page
         break;
 }// end of switch
 }

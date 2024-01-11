@@ -19,6 +19,34 @@
     <!-- Option 1: Include in HTML -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
+    <script language="javascript"> <!--src="../static/js/pageChange.js">-->
+
+         function SelectRedirect(){
+        // ON selection of section this function will work
+        //alert( document.getElementById('s1').value);
+
+        switch(document.getElementById('s1').value)
+        {
+        case "NIFTY":
+        window.location="http://localhost:1255/NiftyPage";
+        break;
+
+        case "BANKNIFTY":
+        window.location="http://localhost:1255/BankNiftyPage";
+        break;
+
+        case "FINNIFTY":
+        window.location="http://localhost:1255/FinNiftyPage";
+          break;
+
+        /// Can be extended to other different selections of SubCategory //////
+        default:
+        window.location="http://localhost:1255/index"; // if no selection matches then redirected to home page
+        break;
+}// end of switch
+}
+
+    </script>
 
 </head>
 <body>
@@ -109,56 +137,38 @@
     </div>
 </nav>
 
-    <div class="container">
-<!--        <div class="dropdown">-->
-            <!--        <div id="Option" class="col-md-5">-->
-            <!--            <a> <label id="selectSymbolOp">Select Symbol</label>-->
-            <!--                <div class="custom_select">-->
-            <!--                    <select id="select_Option" aria-labelledby="selectSymbolLbl">-->
-            <!--                        <option value="">Select</option>-->
-            <!--                        <option th:href="chartStrikePrice" value="chartStrikePrice">NIFTY</option>-->
-            <!--                        <option value="BANKNIFTY">BANKNIFTY</option>-->
-            <!--                        <option value="FINNIFTY">FINNIFTY</option>-->
-            <!--                        <option value="SENSEX">SENSEX</option>-->
-            <!--                        <option value="MIDCAP">MIDCAP</option>-->
-            <!--                    </select>-->
+<div class="container">
+    <SELECT id="s1" NAME="section" onChange="SelectRedirect();">
+        <Option value="">Select Section</option>
+        <Option value="NIFTY">NIFTY</option>
+        <Option value="BANKNIFTY">BANKNIFTY</option>
+        <Option value="FINNIFTY">FINNIFTY</option>
 
-            <!--                    <div class="dropdown">-->
-            <!--                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example-->
-            <!--                            <span class="caret"></span></button>-->
-            <!--                        <ul class="dropdown-menu">-->
-            <!--                            <li><a href="#">HTML</a></li>-->
-            <!--                            <li><a href="#">CSS</a></li>-->
-            <!--                            <li><a href="#">JavaScript</a></li>-->
-            <!--                        </ul>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </a>-->
-            <!--        </div>-->
-            <H5 class="container">
-                <a class=" container  badge text-bg-secondary col-md-3" href="#">Nifty Spot Price :
-                    <span th:text="${spotPrice}">Spot Price</span></a>
-                <span class="badge text-bg-primary col-md-2">Lot Size : 50</span>
-                <a class=" container  badge text-bg-secondary col-md-2" >PCR :
-                    <span th:text="${pcr}">Spot Price</span></a>
-                <!--            <span class="badge text-bg-info" th:text="${pcr}">PCR :  1.25</span>-->
-                <span class="badge text-bg-warning col-md-3">MaxPain Strike :21450</span>
-                <span class="badge text-bg-info col-md-3">Modified MaxPain :21500 </span>
-            </H5>
-        </div>
-        <div id="container" style="width: 1050px; height: 300px; margin: 0 auto"></div>
-        <div id="container1" style="width: 1050px; height: 250px; margin: 0 auto"></div>
-    </div>
+    </SELECT>
+    <H5 class="container">
+        <a class=" container  badge text-bg-secondary col-md-3" href="#">Nifty Spot Price :
+            <span th:text="${spotPrice}">Spot Price</span></a>
+        <span class="badge text-bg-primary col-md-2">Lot Size : 50</span>
+        <a class=" container  badge text-bg-secondary col-md-2">PCR :
+            <span th:text="${pcr}">Spot Price</span></a>
+        <!--            <span class="badge text-bg-info" th:text="${pcr}">PCR :  1.25</span>-->
+        <span class="badge text-bg-warning col-md-3">MaxPain Strike :21450</span>
+        <span class="badge text-bg-info col-md-3">Modified MaxPain :21500 </span>
+    </H5>
+</div>
+<div id="container" style="width: 1050px; height: 300px; margin: 0 auto"></div>
+<div id="container1" style="width: 1050px; height: 250px; margin: 0 auto"></div>
+</div>
 
 
-    <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script th:inline="javascript">
+<script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script th:inline="javascript">
     $(function(){
 
     Highcharts.chart('container1', {
@@ -267,7 +277,9 @@
     });
 
 
-    </script>
+
+
+</script>
 
 </body>
 </html>

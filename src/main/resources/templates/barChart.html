@@ -18,7 +18,34 @@
             crossorigin="anonymous"></script>
     <!-- Option 1: Include in HTML -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <script language="javascript" src="../static/js/pageChange.js"> </script>
+    <script language="javascript"> <!--src="../static/js/pageChange.js">-->
+
+         function SelectRedirect(){
+        // ON selection of section this function will work
+        //alert( document.getElementById('s1').value);
+
+        switch(document.getElementById('s1').value)
+        {
+        case "NIFTY":
+        window.location="http://localhost:1255/NiftyPage";
+        break;
+
+        case "BANKNIFTY":
+        window.location="http://localhost:1255/BankNiftyPage";
+        break;
+
+        case "FINNIFTY":
+        window.location="http://localhost:1255/FinNiftyPage";
+          break;
+
+        /// Can be extended to other different selections of SubCategory //////
+        default:
+        window.location="http://localhost:1255/index"; // if no selection matches then redirected to home page
+        break;
+}// end of switch
+}
+
+    </script>
 
 </head>
 
@@ -116,7 +143,6 @@
         <Option value="NIFTY">NIFTY</option>
         <Option value="BANKNIFTY">BANKNIFTY</option>
         <Option value="FINNIFTY">FINNIFTY</option>
-
     </SELECT>
     <H5 class="container">
         <a class=" container  badge text-bg-secondary col-md-3" href="#">Nifty Spot Price :
