@@ -28,8 +28,10 @@ public class test {
     public String getStrikePrice(Model model) {
         List<Data> records;
 
+
         NSE nse = nifty.getLiveNiftyData(FeignBuilder.builder());
 
+//        spotprice=nse.getRecords().getUnderlyingValue();
         Map<Double, Double> putVal = new LinkedHashMap<>();
         Map<Double, Double> callVal = new LinkedHashMap<>();
 
@@ -82,7 +84,12 @@ public class test {
 //        String.format("%.2f", pcr);
         System.out.println(pcr);
         model.addAttribute("pcr" ,pcr);
+
         return "barChart";
     }
 
+    @GetMapping("/builder")
+    public String builderPage(){
+        return "builder";
+    }
 }
