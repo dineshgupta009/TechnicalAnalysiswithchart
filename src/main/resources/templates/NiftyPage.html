@@ -40,6 +40,10 @@
         window.location="http://localhost:1255/FinNiftyPage";
           break;
 
+         case "MIDCPNIFTY":
+        window.location="http://localhost:1255/MidCpNiftyPage";
+          break;
+
         /// Can be extended to other different selections of SubCategory //////
         default:
         window.location="http://localhost:1255/index"; // if no selection matches then redirected to home page
@@ -145,6 +149,7 @@
             <Option value="NIFTY">NIFTY</option>
             <Option value="BANKNIFTY">BANKNIFTY</option>
             <Option value="FINNIFTY">FINNIFTY</option>
+            <Option value="MIDCPNIFTY">MIDCPNIFTY</option>
         </SELECT>
         <H5>
             <span th:text="${spotPrice}" class="badge text-bg-secondary">Spot Price</span>

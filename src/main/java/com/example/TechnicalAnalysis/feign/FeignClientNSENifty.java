@@ -15,4 +15,7 @@ public interface FeignClientNSENifty {
 	
 	@GetMapping("/api/option-chain-indices?symbol=NIFTY")
 	public NSE 	getLiveNiftyData(@RequestHeader Map<String, String> headerMap);
+
+	@GetMapping("/api/option-chain-indices?symbol=MIDCPNIFTY")
+	public NSE 	getLiveMIDCPNiftyData(@RequestHeader Map<String, String> headerMap);
 }
