@@ -22,8 +22,9 @@ public interface FeignClientStocks {
     @GetMapping("/api/option-chain-equities?symbol=ATUL")
     public NSE getLiveStocksData(@RequestHeader Map<String, String> headerMap1);
 
-//    @GetMapping("/api/option-chain-equities")
-//    public NSE getLiveStocksData(@RequestParam(value = "symbol") String symbol,
-//                                 @RequestHeader Map<String, String> headerMap1);
+//    COALINDIA
+
+    @GetMapping("/api/option-chain-equities?symbol=COALINDIA")
+    public NSE getLiveCoalIndiaData(@RequestHeader Map<String, String> headerMap1);
 
 }

@@ -47,6 +47,8 @@
 
 
 
+
+
     </script>
     <script>
            function show(elementId) {
@@ -56,6 +58,8 @@
                 }
                 document.getElementById(elementId).style.display = "block";
                 }
+
+
     </script>
 
 </head>
@@ -171,18 +175,18 @@
         <button type="button"
                 class="white--text v-btn v-btn--small theme--light green"
                 style="width: 130px;">
-            <div class="v-btn__content"  onclick="showDiv('bullish')">Bullish</div>
+            <div class="v-btn__content" onclick="showDiv('bullish')">Bullish</div>
         </button>
         <br>
         <button type="button"
                 class="white--text v-btn v-btn--outline v-btn--depressed v-btn--small theme--light red--text"
-                style="width: 130px;" >
+                style="width: 130px;">
             <div class="v-btn__content" onclick="showDiv('bearish')">Bearish</div>
         </button>
         <br>
         <button type="button"
                 class="white--text v-btn v-btn--outline v-btn--depressed v-btn--small theme--light grey--text"
-                style="width: 130px;" >
+                style="width: 130px;">
             <div class="v-btn__content" onclick="showDiv('non-direction')">Non-Directional</div>
         </button>
     </div>
@@ -741,9 +745,9 @@
 </div>
 
 
-<div class="v-card v-card--flat v-sheet theme--light" sm12="">
-    <div class="layout row wrap">
-        <div style="display: flex;">
+<div class=" container v-card v-card--flat v-sheet theme--light" sm12="">
+    <div class="layout row wrap ">
+        <div style="display: flex;" class="container  badge text-bg-secondary col-md-3">
             <div>
                 <button type="button"
                         class="white--text v-btn v-btn--outline v-btn--depressed v-btn--small theme--light green--text"
@@ -955,199 +959,7 @@
                     </form>
                 </div>
             </div>
-            <div>
-                <div class="layout row wrap">
-                    <form novalidate="novalidate" class="v-form">
-                        <div class="flex mx-1 my-2">
-                            <div>
-                                <div class="v-card v-sheet theme--light elevation-0" align="center"
-                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
-                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
-                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
-                                        <div class="v-image__image v-image__image--cover"
-                                             style="background-image: url(&quot;https://opstra.definedge.com/img/ShortCall.7a52d515.svg&quot;); background-position: center center;">
-                                        </div>
-                                        <div class="v-responsive__content"></div>
-                                    </div>
-                                    <div wrap=""
-                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
-                                        Short<br>Call
-                                    </div>
-                                </div>
-                                <div class="v-menu"></div>
-                            </div>
-                        </div>
-                    </form>
-                    <form novalidate="novalidate" class="v-form">
-                        <div class="flex mx-1 my-2">
-                            <div>
-                                <div class="v-card v-sheet theme--light elevation-0" align="center"
-                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
-                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
-                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
-                                        <div class="v-image__image v-image__image--cover"
-                                             style="background-image: url(&quot;https://opstra.definedge.com/img/LongPut.d0b68a82.svg&quot;); background-position: center center;">
-                                        </div>
-                                        <div class="v-responsive__content"></div>
-                                    </div>
-                                    <div wrap=""
-                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
-                                        Long<br>Put
-                                    </div>
-                                </div>
-                                <div class="v-menu"></div>
-                            </div>
-                        </div>
-                    </form>
-                    <form novalidate="novalidate" class="v-form">
-                        <div class="flex mx-1 my-2">
-                            <div class="text-xs-center">
-                                <div class="v-card v-sheet theme--light elevation-0" align="center"
-                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
-                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
-                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
-                                        <div class="v-image__image v-image__image--cover"
-                                             style="background-image: url(&quot;https://opstra.definedge.com/img/BearCallSpread.f434f12c.svg&quot;); background-position: center center;">
-                                        </div>
-                                        <div class="v-responsive__content"></div>
-                                    </div>
-                                    <div wrap=""
-                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
-                                        Bear<br>Call Spread
-                                    </div>
-                                </div>
-                                <div class="v-menu"></div>
-                            </div>
-                        </div>
-                    </form>
-                    <form novalidate="novalidate" class="v-form">
-                        <div class="flex mx-1 my-2">
-                            <div class="text-xs-center">
-                                <div class="v-card v-sheet theme--light elevation-0" align="center"
-                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
-                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
-                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
-                                        <div class="v-image__image v-image__image--cover"
-                                             style="background-image: url(&quot;https://opstra.definedge.com/img/BearPutSpread.7bf0a546.svg&quot;); background-position: center center;">
-                                        </div>
-                                        <div class="v-responsive__content"></div>
-                                    </div>
-                                    <div wrap=""
-                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
-                                        Bear<br>Put Spread
-                                    </div>
-                                </div>
-                                <div class="v-menu"></div>
-                            </div>
-                        </div>
-                    </form>
-                    <form novalidate="novalidate" class="v-form">
-                        <div class="flex mx-1 my-2">
-                            <div class="text-xs-center">
-                                <div class="v-card v-sheet theme--light elevation-0" align="center"
-                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
-                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
-                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
-                                        <div class="v-image__image v-image__image--cover"
-                                             style="background-image: url(&quot;https://opstra.definedge.com/img/PutRatioBackSpread.63fc3a5f.svg&quot;); background-position: center center;">
-                                        </div>
-                                        <div class="v-responsive__content"></div>
-                                    </div>
-                                    <div wrap=""
-                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
-                                        Put Ratio<br>Back Spread
-                                    </div>
-                                </div>
-                                <div class="v-menu"></div>
-                            </div>
-                        </div>
-                    </form>
-                    <form novalidate="novalidate" class="v-form">
-                        <div class="flex mx-1 my-2">
-                            <div class="text-xs-center">
-                                <div class="v-card v-sheet theme--light elevation-0" align="center"
-                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
-                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
-                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
-                                        <div class="v-image__image v-image__image--cover"
-                                             style="background-image: url(&quot;https://opstra.definedge.com/img/ShortSyntheticFuture.5facd2ae.svg&quot;); background-position: center center;">
-                                        </div>
-                                        <div class="v-responsive__content"></div>
-                                    </div>
-                                    <div wrap=""
-                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
-                                        Short<br>Synthetic
-                                    </div>
-                                </div>
-                                <div class="v-menu"></div>
-                            </div>
-                        </div>
-                    </form>
-                    <form novalidate="novalidate" class="v-form">
-                        <div class="flex mx-1 my-2">
-                            <div class="text-xs-center">
-                                <div class="v-card v-sheet theme--light elevation-0" align="center"
-                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
-                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
-                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
-                                        <div class="v-image__image v-image__image--cover"
-                                             style="background-image: url(&quot;https://opstra.definedge.com/img/RiskReversal.acf4c230.svg&quot;); background-position: center center;">
-                                        </div>
-                                        <div class="v-responsive__content"></div>
-                                    </div>
-                                    <div wrap=""
-                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
-                                        Risk<br>Reversal
-                                    </div>
-                                </div>
-                                <div class="v-menu"></div>
-                            </div>
-                        </div>
-                    </form>
-                    <form novalidate="novalidate" class="v-form">
-                        <div class="flex mx-1 my-2">
-                            <div class="text-xs-center">
-                                <div class="v-card v-sheet theme--light elevation-0" align="center"
-                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
-                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
-                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
-                                        <div class="v-image__image v-image__image--cover"
-                                             style="background-image: url(&quot;https://opstra.definedge.com/img/BearishButterfly.f955584a.svg&quot;); background-position: center center;">
-                                        </div>
-                                        <div class="v-responsive__content"></div>
-                                    </div>
-                                    <div wrap=""
-                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
-                                        Bearish<br>Butterfly
-                                    </div>
-                                </div>
-                                <div class="v-menu"></div>
-                            </div>
-                        </div>
-                    </form>
-                    <form novalidate="novalidate" class="v-form">
-                        <div class="flex mx-1 my-2">
-                            <div class="text-xs-center">
-                                <div class="v-card v-sheet theme--light elevation-0" align="center"
-                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
-                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
-                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
-                                        <div class="v-image__image v-image__image--cover"
-                                             style="background-image: url(&quot;https://opstra.definedge.com/img/BearishCondor.a75342b7.svg&quot;); background-position: center center;">
-                                        </div>
-                                        <div class="v-responsive__content"></div>
-                                    </div>
-                                    <div wrap=""
-                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
-                                        Bearish<br>Condor
-                                    </div>
-                                </div>
-                                <div class="v-menu"></div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div><!---->
+
         </div>
     </div>
 </div>
@@ -1282,6 +1094,8 @@
       );
 
     });
+
+
 
 
 

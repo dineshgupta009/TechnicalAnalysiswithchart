@@ -1,7 +1,9 @@
 package com.example.TechnicalAnalysis.controller;
 
+import com.example.TechnicalAnalysis.entity.NSE;
 import com.example.TechnicalAnalysis.feign.FeignClientNSEBankNifty;
 import com.example.TechnicalAnalysis.feign.FeignClientNSENifty;
+import com.example.TechnicalAnalysis.feign.FeignClientStocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,8 @@ import com.example.TechnicalAnalysis.processor.NSEDataProcessor;
 @RestController
 public class NseRestController {
 
+    @Autowired
+    FeignClientStocks stocks;
     @Autowired
     FeignClientNSEBankNifty bankNifty;
 
@@ -35,5 +39,12 @@ public class NseRestController {
     }
 
 
+    @GetMapping("/stocks1")
+    public NSE showAnalysisStocks1(Model model) {
+//        NSE nse = stocks.getLiveStocksData(FeignBuilder.builder());
+        NSE coalindia = stocks.getLiveCoalIndiaData(FeignBuilder.builder());
+//        model.addAttribute("expiredate", nse.getRecords().getExpiryDates());
+        return coalindia;
+    }
 
 }

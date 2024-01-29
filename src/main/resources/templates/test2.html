@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1"/>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <!-- Option 1: Include in HTML -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <script language="javascript"> <!--src="../static/js/pageChange.js">-->
+
+         function SelectRedirect(){
+        // ON selection of section this function will work
+        //alert( document.getElementById('s1').value);
+
+        switch(document.getElementById('s1').value)
+        {
+        case "NIFTY":
+        window.location="http://localhost:1255/NiftyPage";
+        break;
+
+        case "BANKNIFTY":
+        window.location="http://localhost:1255/BankNiftyPage";
+        break;
+
+        case "FINNIFTY":
+        window.location="http://localhost:1255/FinNiftyPage";
+          break;
+
+        /// Can be extended to other different selections of SubCategory //////
+        default:
+        window.location="http://localhost:1255/index"; // if no selection matches then redirected to home page
+        break;
+}// end of switch
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+    <script>
+    function showDiv(divId) {
+      // Hide all divs
+      hideAllDivs();
+
+      // Show the selected div
+      document.getElementById(divId).style.display = 'block';
+    }
+
+    function hideAllDivs() {
+      var divs = document.querySelectorAll('.hidden');
+      divs.forEach(function(div) {
+        div.style.display = 'none';
+      });
+    }
+
+
+
+
+    </script>
+    <style>
+    .hidden {
+      display: none;
+    }
+
+
+
+
+
+    </style>
+
+</head>
+
+<body>
+
+<nav class=" navbar navbar-expand-xl navbar-dark bg-secondary static-top">
+    <div class="container">
+        <a th:href="@{/symbol}" class="navbar-brand" href="#"> Options Gainer <i class="bi bi-house-fill"></i></a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Builder <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolioLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false"><i class="bi bi-file-earmark-bar-graph-fill"></i>
+                        Portfolio
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownPortfolioLink">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownFutureLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Future
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownFutureLink">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOptionsLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false"><i class="bi bi-bar-chart-line-fill"></i>
+                        Options
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownOptionsLink">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOILink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Open Interest
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownOILink">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownFII/DIILink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        FII/DII
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownFII/DIILink">
+                        <a class="dropdown-item" th:href="@{/chartStrikePrice}"><i class="bi bi-house-fill"></i>FII/DII
+                            Cash Market</a>
+                        <a class="dropdown-item" href="#"><i class="bi bi-house-fill"></i>FII/DII Derivatives</a>
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownEducationLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Education
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownEducationLink">
+                        <a class="dropdown-item" href="#"><i class="bi bi-laptop-fill"></i> How to User</a>
+                        <a class="dropdown-item" href="#"><i class="bi bi-book-fill"></i> Webinars</a>
+                        <a class="dropdown-item" href="#"><i class="bi bi-circle-fill"></i> Blogs</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <SELECT id="s1" NAME="section" onChange="SelectRedirect();">
+        <Option value="">Select Section</option>
+        <Option value="NIFTY">NIFTY</option>
+        <Option value="BANKNIFTY">BANKNIFTY</option>
+        <Option value="FINNIFTY">FINNIFTY</option>
+    </SELECT>
+    <H5 class="container">
+        <a class=" container  badge text-bg-secondary col-md-3" href="#">Nifty Spot Price :
+            <span th:text="${spotPrice}">Spot Price</span></a>
+        <span class="badge text-bg-primary col-md-2">Lot Size : 50</span>
+        <a class=" container  badge text-bg-secondary col-md-2">PCR :
+            <span th:text="${pcr}">Spot Price</span></a>
+        <!--            <span class="badge text-bg-info" th:text="${pcr}">PCR :  1.25</span>-->
+        <span class="badge text-bg-warning col-md-3">MaxPain Strike :21450</span>
+        <span class="badge text-bg-info col-md-3">Modified MaxPain :21500 </span>
+    </H5>
+</div>
+<div class="container ">
+    <div class="row">
+        <div class="col-md-2">
+            <button onclick="showDiv('bullish')" type="button" class="btn btn-success btn-sm" style="width: 138px;">
+                <div class="v-btn__content">Bullish</div>
+            </button>
+            <br>
+            <button onclick="showDiv('bearish')" type="button" class="btn btn-danger btn-sm" style="width: 138px;">
+                <div class="v-btn__content">Bearish</div>
+            </button>
+            <br>
+            <button onclick="showDiv('noDirection')" type="button" class="btn btn-info btn-sm" style="width: 138px;">
+                <div class="v-btn__content">Non-Directional</div>
+            </button>
+        </div>
+        <!--        //style="display: none;"-->
+        <div class="col-md-10">
+            <div id="bullish" class="hidden">
+                <div class="d-flex flex-wrap">
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/LongCall.05008660.svg&quot;); background-position: center center;">
+                                        </div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap=""
+                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Long<br>Call
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/ShortPut.d5288c5d.svg&quot;); background-position: center center;">
+                                        </div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap=""
+                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Short<br>Put
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-xs-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/BullCallSpread.50e0dd42.svg&quot;); background-position: center center;">
+                                        </div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap=""
+                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Bull<br>Call Spread
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-xs-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/BullPutSpread.b76bd114.svg&quot;); background-position: center center;">
+                                        </div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap=""
+                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Bull<br>Put Spread
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-xs-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/CallRatioBackSpread.eaa83588.svg&quot;); background-position: center center;">
+                                        </div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap=""
+                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Call Ratio<br>Back Spread
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/LongSyntheticFuture.94aac3c4.svg&quot;); background-position: center center;">
+                                        </div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap=""
+                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Long<br>Synthetic
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-xs-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/RangeForward.6baebb05.svg&quot;); background-position: center center;">
+                                        </div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap=""
+                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Range<br>Forward
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-xs-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/BullishButterfly.d23d2226.svg&quot;); background-position: center center;">
+                                        </div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap=""
+                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Bullish<br>Butterfly
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-xs-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/BullishCondor.4f3cac24.svg&quot;); background-position: center center;">
+                                        </div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap=""
+                                         class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Bullish<br>Condor
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="bearish" class="hidden">
+                <div class="d-flex flex-wrap">
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <img src="/static/image/ShortCall.png" class="rounded img-fluid">
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <img src="/static/image/LongPut.png" class="rounded img-fluid">
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <img src="/static/image/Bullish Condor.png" class="rounded img-fluid">
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <img src="/static/image/Short Put.png" class="rounded img-thumbnail">
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <img src="/static/image/Short Put.png" class="rounded img-thumbnail">
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <img src="/static/image/Short Put.png" class="rounded img-thumbnail">
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <img src="/static/image/Short Put.png" class="rounded img-thumbnail">
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <img src="/static/image/Short Put.png" class="rounded img-thumbnail">
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <img src="/static/image/Short Put.png" class="rounded img-thumbnail">
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div id="noDirection" class="hidden">
+                <div class="d-flex flex-wrap">
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="pa-0 v-card v-card--flat v-sheet theme--light">
+                                    <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                         style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                        <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                            <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                            <div class="v-image__image v-image__image--cover"
+                                                 style="background-image: url(&quot;https://opstra.definedge.com/img/LongStraddle.3cad4e55.svg&quot;); background-position: center center;"></div>
+                                            <div class="v-responsive__content"></div>
+                                        </div>
+                                        <div wrap=""
+                                             class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                            Long<br>Straddle
+                                        </div>
+                                    </div>
+                                    <div class="v-menu"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="pa-0 v-card v-card--flat v-sheet theme--light">
+                                    <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                         style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                        <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                            <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                            <div class="v-image__image v-image__image--cover"
+                                                 style="background-image: url(&quot;https://opstra.definedge.com/img/ShortStraddle.115924bb.svg&quot;); background-position: center center;"></div>
+                                            <div class="v-responsive__content"></div>
+                                        </div>
+                                        <div wrap=""
+                                             class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                            Short<br>Straddle
+                                        </div>
+                                    </div>
+                                    <div class="v-menu"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/LongStrangle.156940da.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Long<br>Strangle
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/ShortStrangle.2cce8643.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Short<br>Strangle
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-xs-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/JadeLizard.7bd45daa.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Jade<br>Lizard
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-xs-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/ReverseJadeLizard.5380a48a.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Reverse<br>Jade Lizard
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-xs-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/CallRatioSpread.755fe255.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Call<br>Ratio Spread
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-xs-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/PutRatioSpread.18f43e40.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Put<br>Ratio Spread
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-xs-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/Batman.966ef6c7.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Batman<br>strategy
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-xs-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/LongIronFly.bb246163.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Long<br>Iron Fly
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-xs-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/ShortIronFly.0fb1117d.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Short<br>Iron Fly
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-xs-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/DoubleFly.1fdbba1c.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Double<br>Fly
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-xs-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/LongIronCondor.dbadcd99.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Long<br>Iron Condor
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-xs-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/ShortIronCondor.a50c9ac9.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Short<br>Iron Condor
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-xs-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/DoubleCondor.d21b59fd.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Double<br>Condor
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/CallCalendar.5ca860c3.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Call<br>Calendar
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/PutCalendar.728f8058.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Put<br>Calendar
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div>
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/DiagonalCalendarSpread.f286a880.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Diagonal<br>Calendar
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/ShortIronFly.0fb1117d.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Call<br>Butterfly
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <form novalidate="novalidate" class="v-form">
+                        <div class="flex mx-1 my-2">
+                            <div class="text-center">
+                                <div class="v-card v-sheet theme--light elevation-0" align="center"
+                                     style="height: 105px; width: 80px; border: 1.5px solid gray;">
+                                    <div class="v-responsive v-image" style="height: 70px; width: 70px;">
+                                        <div class="v-responsive__sizer" style="padding-bottom: 100%;"></div>
+                                        <div class="v-image__image v-image__image--cover"
+                                             style="background-image: url(&quot;https://opstra.definedge.com/img/ShortIronFly.0fb1117d.svg&quot;); background-position: center center;"></div>
+                                        <div class="v-responsive__content"></div>
+                                    </div>
+                                    <div wrap="" class="blue-grey--text caption font-weight-medium pa-0 ma-0 textfont">
+                                        Put<br>Butterfly
+                                    </div>
+                                </div>
+                                <div class="v-menu"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script th:inline="javascript">
+    $(function(){
+
+    Highcharts.chart('container1', {
+        chart: {
+            type: 'column',
+            spacingTop: 0,
+            spacingRight: 0,
+            spacingBottom: 0,
+            spacingLeft: 0,
+        },
+
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: [[${strikePrice}]],
+            crosshair: true
+        },
+        yAxis: {
+
+            title: {
+                text: 'ChangeIn OI'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} K</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Put Volume',
+            data: [[${putVal}]],
+            color: "#f62f3b"
+        },{
+            name: 'Call Volume',
+            data: [[${callVal}]],
+            color: "#0c7c05"
+        }]
+      });
+<!--  ================================-->
+    Highcharts.chart('container',
+    {
+        chart:
+        {
+                type: 'column',
+                spacingTop: 0,
+                spacingRight: 0,
+                spacingBottom: 0,
+                spacingLeft: 0,
+        },
+                 title: {
+                 text: 'Nifty'
+            },
+              subtitle: {
+            text: ''
+        },
+        xAxis: {
+             plotLines: [{
+                color: '#999999',
+                dashStyle: 'Dot',
+                width: 2,
+                label: {
+          align: 'center',       // Horizontal alignment of the label. Can be one of "left", "center" or "right".
+          rotation: null,      // Rotation of the text label in degrees. Defaults to 0 for horizontal plot lines and 90 for vertical lines.
+          text: 'NIFTY ATM Strike' ,          // The text itself. A subset of HTML is supported.
+          textAlign: null,     // The text alignment for the label. While align determines where the texts anchor point is placed within the plot band, textAlign determines how the text is aligned against its anchor point. Possible values are "left", "center" and "right".
+          useHTML: false,      // Whether to use HTML to render the labels.
+          verticalAlign: top,  // Vertical alignment of the label relative to the plot band. Can be one of "top", "middle" or "bottom".
+          x: null,             // Horizontal position relative the alignment.
+          y: null              // Vertical position of the text baseline relative to the alignment.
+        },
+                value: 10,
+            }],
+            categories: [[${strikePrice}]],
+            crosshair: false
+        },
+        yAxis: {
+                title: {
+                text: 'Open Interest'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} K</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Put Volume',
+            data: [[${OiPutVal}]],
+            color: "#f62f3b"
+        },{
+            name: 'Call Volume',
+            data: [[${OiCallVal}]],
+            color: "#0c7c05"
+        }]
+      },
+
+      );
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

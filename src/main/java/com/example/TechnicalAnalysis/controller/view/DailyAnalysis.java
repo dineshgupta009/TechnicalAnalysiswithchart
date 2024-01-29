@@ -42,32 +42,62 @@ public class DailyAnalysis {
 
     @GetMapping("BankNiftyPage")
     public String showBankNiftyChart(Model model) {
+        List<Data> records;
 
-        List<Double> showData = processor.getPutStrikePrice(bankNifty.getLiveBankNiftyData(FeignBuilder.builder()), 1000, 100);
-        Collections.sort(showData);
+        NSE nse = bankNifty.getLiveBankNiftyData(FeignBuilder.builder());
 
-        FilteredResponse response = processor.processNiftyData(nifty.getLiveNiftyData(FeignBuilder.builder()),500,50);
+        Map<Double, Double> putVal = new LinkedHashMap<>();
+        Map<Double, Double> callVal = new LinkedHashMap<>();
 
-        System.out.println("Strike Price" +showData);
+        Map<Double, Double> OiPutVal = new LinkedHashMap<>();
+        Map<Double, Double> OiCallVal = new LinkedHashMap<>();
 
-        List<Double> showData1 = processor.getPutVol(bankNifty.getLiveBankNiftyData(FeignBuilder.builder()), 1000, 100);
-        Collections.sort(showData1);
-        System.out.println("put vol"+showData1);
+        double currentStrike = Math.round((nse.getRecords().getUnderlyingValue() / 100)) * 100;
 
-        List<Double> callVol = processor.getCallVol(bankNifty.getLiveBankNiftyData(FeignBuilder.builder()), 1000, 100);
+        records = Arrays.asList(nse.getFiltered().getData()).stream()
+                .filter(data -> (data.getStrikePrice() >= (currentStrike - 1000) && data.getStrikePrice() <= (currentStrike + 1000)))
+                .collect(Collectors.toList());
+        for (Data data : records) {
+            putVal.put(data.getStrikePrice(), (data.getPe().getChangeinOpenInterest()));
+            callVal.put(data.getStrikePrice(), (data.getCe().getChangeinOpenInterest()));
+            OiPutVal.put(data.getStrikePrice(), (data.getPe().getOpenInterest()));
+            OiCallVal.put(data.getStrikePrice(), (data.getCe().getOpenInterest()));
+        }
 
-        Collections.sort(callVol);
-        List<Double> strikePrice = processor.getPutStrikePrice(bankNifty.getLiveBankNiftyData(FeignBuilder.builder()), 1000, 100);
-        Collections.sort(strikePrice);
-        List<Double> putVol = processor.getPutStrikePrice(bankNifty.getLiveBankNiftyData(FeignBuilder.builder()), 1000, 100);
+        Set<Double> keySet = putVal.keySet();
+        List<Double> strikePrice = new LinkedList<>(keySet);
+        System.out.println(putVal.keySet());
+        model.addAttribute("strikePrice", strikePrice);
 
-        model.addAttribute("name", strikePrice);
-        model.addAttribute("callVol", callVol);
-        model.addAttribute("age", showData1);
+        // Creating an ArrayList of values
+        List<Double> listOfPutValues = new LinkedList<>(putVal.values());
+        List<Double> listOfCallValues = new LinkedList<>(callVal.values());
+//        System.out.println(putVal);
+//        System.out.println(listOfPutValues);
+        model.addAttribute("putVal", listOfPutValues);
+        model.addAttribute("callVal", listOfCallValues);
 
-        NSE nse = nifty.getLiveNiftyData(FeignBuilder.builder());
-        model.addAttribute("spotPrice",nse.getRecords().getUnderlyingValue());
-        model.addAttribute("expiryDate",nse.getRecords().getExpiryDates());
+        List<Double> listOfOiPutValues = new LinkedList<>(OiPutVal.values());
+        List<Double> listOfOiCallValues = new LinkedList<>(OiCallVal.values());
+        model.addAttribute("OiPutVal", listOfOiPutValues);
+        model.addAttribute("OiCallVal", listOfOiCallValues);
+        model.addAttribute("spotPrice", nse.getRecords().getUnderlyingValue());
+
+        List<String> operators = new ArrayList<>();
+        operators.add("NIFTY");
+        operators.add("BANKNIFTY");
+        model.addAttribute("operators", operators);
+
+//      getting pcr value
+
+        Double putValue = processor.processBankNiftyData(bankNifty.getLiveBankNiftyData(FeignBuilder.builder()), 1000, 100).getPutTotalOI();
+        Double callValue = processor.processBankNiftyData(bankNifty.getLiveBankNiftyData(FeignBuilder.builder()), 1000, 100).getCallTotalOI();
+
+        float pcr = Float.parseFloat(String.format("%.2f", (putValue / callValue)));
+
+//        String.format("%.2f", pcr);
+        System.out.println(pcr);
+        model.addAttribute("pcr", pcr);
 
         return "BankNiftyPage";
 
@@ -98,39 +128,39 @@ public class DailyAnalysis {
         }
 
         Set<Double> keySet = putVal.keySet();
-        List<Double> strikePrice= new LinkedList<>(keySet);
+        List<Double> strikePrice = new LinkedList<>(keySet);
         System.out.println(putVal.keySet());
         model.addAttribute("strikePrice", strikePrice);
 
         // Creating an ArrayList of values
-        List<Double> listOfPutValues= new LinkedList<>(putVal.values());
-        List<Double> listOfCallValues= new LinkedList<>(callVal.values());
+        List<Double> listOfPutValues = new LinkedList<>(putVal.values());
+        List<Double> listOfCallValues = new LinkedList<>(callVal.values());
 //        System.out.println(putVal);
 //        System.out.println(listOfPutValues);
         model.addAttribute("putVal", listOfPutValues);
         model.addAttribute("callVal", listOfCallValues);
 
-        List<Double> listOfOiPutValues= new LinkedList<>(OiPutVal.values());
-        List<Double> listOfOiCallValues= new LinkedList<>(OiCallVal.values());
+        List<Double> listOfOiPutValues = new LinkedList<>(OiPutVal.values());
+        List<Double> listOfOiCallValues = new LinkedList<>(OiCallVal.values());
         model.addAttribute("OiPutVal", listOfOiPutValues);
         model.addAttribute("OiCallVal", listOfOiCallValues);
-        model.addAttribute("spotPrice",nse.getRecords().getUnderlyingValue());
+        model.addAttribute("spotPrice", nse.getRecords().getUnderlyingValue());
 
-        List<String> operators =  new ArrayList<>();
+        List<String> operators = new ArrayList<>();
         operators.add("NIFTY");
         operators.add("BANKNIFTY");
         model.addAttribute("operators", operators);
 
 //      getting pcr value
 
-        Double putValue =  processor.processNiftyData(nifty.getLiveNiftyData(FeignBuilder.builder()),500,50).getPutTotalOI();
-        Double callValue =  processor.processNiftyData(nifty.getLiveNiftyData(FeignBuilder.builder()),500,50).getCallTotalOI();
+        Double putValue = processor.processNiftyData(nifty.getLiveNiftyData(FeignBuilder.builder()), 500, 50).getPutTotalOI();
+        Double callValue = processor.processNiftyData(nifty.getLiveNiftyData(FeignBuilder.builder()), 500, 50).getCallTotalOI();
 
-        float pcr = Float.parseFloat(String.format("%.2f", (putValue/callValue)));
+        float pcr = Float.parseFloat(String.format("%.2f", (putValue / callValue)));
 
 //        String.format("%.2f", pcr);
         System.out.println(pcr);
-        model.addAttribute("pcr" ,pcr);
+        model.addAttribute("pcr", pcr);
         return "barChart";
     }
 
@@ -159,45 +189,45 @@ public class DailyAnalysis {
         }
 
         Set<Double> keySet = putVal.keySet();
-        List<Double> strikePrice= new LinkedList<>(keySet);
+        List<Double> strikePrice = new LinkedList<>(keySet);
         System.out.println(putVal.keySet());
         model.addAttribute("strikePrice", strikePrice);
 
         // Creating an ArrayList of values
-        List<Double> listOfPutValues= new LinkedList<>(putVal.values());
-        List<Double> listOfCallValues= new LinkedList<>(callVal.values());
+        List<Double> listOfPutValues = new LinkedList<>(putVal.values());
+        List<Double> listOfCallValues = new LinkedList<>(callVal.values());
 //        System.out.println(putVal);
 //        System.out.println(listOfPutValues);
         model.addAttribute("putVal", listOfPutValues);
         model.addAttribute("callVal", listOfCallValues);
 
-        List<Double> listOfOiPutValues= new LinkedList<>(OiPutVal.values());
-        List<Double> listOfOiCallValues= new LinkedList<>(OiCallVal.values());
+        List<Double> listOfOiPutValues = new LinkedList<>(OiPutVal.values());
+        List<Double> listOfOiCallValues = new LinkedList<>(OiCallVal.values());
         model.addAttribute("OiPutVal", listOfOiPutValues);
         model.addAttribute("OiCallVal", listOfOiCallValues);
-        model.addAttribute("spotPrice",nse.getRecords().getUnderlyingValue());
+        model.addAttribute("spotPrice", nse.getRecords().getUnderlyingValue());
 
-        List<String> operators =  new ArrayList<>();
+        List<String> operators = new ArrayList<>();
         operators.add("NIFTY");
         operators.add("BANKNIFTY");
         model.addAttribute("operators", operators);
 
 //      getting pcr value
 
-        Double putValue =  processor.processNiftyData(finNifty.getLiveFinNiftyData(FeignBuilder.builder()),500,50).getPutTotalOI();
-        Double callValue =  processor.processNiftyData(finNifty.getLiveFinNiftyData(FeignBuilder.builder()),500,50).getCallTotalOI();
+        Double putValue = processor.processNiftyData(finNifty.getLiveFinNiftyData(FeignBuilder.builder()), 500, 50).getPutTotalOI();
+        Double callValue = processor.processNiftyData(finNifty.getLiveFinNiftyData(FeignBuilder.builder()), 500, 50).getCallTotalOI();
 
-        float pcr = Float.parseFloat(String.format("%.2f", (putValue/callValue)));
+        float pcr = Float.parseFloat(String.format("%.2f", (putValue / callValue)));
 
 //        String.format("%.2f", pcr);
         System.out.println(pcr);
-        model.addAttribute("pcr" ,pcr);
+        model.addAttribute("pcr", pcr);
         return "FinNiftyPage";
 
     }
 
-    @GetMapping("/MidcNiftyPage")
-    public String getMidcNiftyPageStrikePrice(Model model) {
+    @GetMapping("/MidCpNiftyPage")
+    public String getMidCpNiftyPageStrikePrice(Model model) {
         List<Data> records;
 
         NSE nse = nifty.getLiveMIDCPNiftyData(FeignBuilder.builder());
@@ -221,44 +251,44 @@ public class DailyAnalysis {
         }
 
         Set<Double> keySet = putVal.keySet();
-        List<Double> strikePrice= new LinkedList<>(keySet);
+        List<Double> strikePrice = new LinkedList<>(keySet);
         System.out.println(putVal.keySet());
         model.addAttribute("strikePrice", strikePrice);
 
         // Creating an ArrayList of values
-        List<Double> listOfPutValues= new LinkedList<>(putVal.values());
-        List<Double> listOfCallValues= new LinkedList<>(callVal.values());
+        List<Double> listOfPutValues = new LinkedList<>(putVal.values());
+        List<Double> listOfCallValues = new LinkedList<>(callVal.values());
 
         model.addAttribute("putVal", listOfPutValues);
         model.addAttribute("callVal", listOfCallValues);
 
-        List<Double> listOfOiPutValues= new LinkedList<>(OiPutVal.values());
-        List<Double> listOfOiCallValues= new LinkedList<>(OiCallVal.values());
+        List<Double> listOfOiPutValues = new LinkedList<>(OiPutVal.values());
+        List<Double> listOfOiCallValues = new LinkedList<>(OiCallVal.values());
         model.addAttribute("OiPutVal", listOfOiPutValues);
         model.addAttribute("OiCallVal", listOfOiCallValues);
-        model.addAttribute("spotPrice",nse.getRecords().getUnderlyingValue());
+        model.addAttribute("spotPrice", nse.getRecords().getUnderlyingValue());
 
-        List<String> operators =  new ArrayList<>();
+        List<String> operators = new ArrayList<>();
         operators.add("NIFTY");
         operators.add("BANKNIFTY");
         model.addAttribute("operators", operators);
 
 //      getting pcr value
 
-        Double putValue =  processor.processNiftyData(nifty.getLiveNiftyData(FeignBuilder.builder()),500,50).getPutTotalOI();
-        Double callValue =  processor.processNiftyData(nifty.getLiveNiftyData(FeignBuilder.builder()),500,50).getCallTotalOI();
+        Double putValue = processor.processNiftyData(nifty.getLiveNiftyData(FeignBuilder.builder()), 500, 50).getPutTotalOI();
+        Double callValue = processor.processNiftyData(nifty.getLiveNiftyData(FeignBuilder.builder()), 500, 50).getCallTotalOI();
 
-        float pcr = Float.parseFloat(String.format("%.2f", (putValue/callValue)));
+        float pcr = Float.parseFloat(String.format("%.2f", (putValue / callValue)));
 
 //        String.format("%.2f", pcr);
         System.out.println(pcr);
-        model.addAttribute("pcr" ,pcr);
+        model.addAttribute("pcr", pcr);
         return "MidCpNiftyPage";
     }
 
 
     @GetMapping("/stocks")
-    public String showAnalysisStocks1( Model model) {
+    public String showAnalysisStocks1(Model model) {
         NSE nse = stocks.getLiveStocksData(FeignBuilder.builder());
         model.addAttribute("expiredate", nse.getRecords().getExpiryDates());
         return "index";

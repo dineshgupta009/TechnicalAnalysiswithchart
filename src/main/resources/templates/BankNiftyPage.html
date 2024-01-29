@@ -18,7 +18,6 @@
             crossorigin="anonymous"></script>
     <!-- Option 1: Include in HTML -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-
     <script language="javascript"> <!--src="../static/js/pageChange.js">-->
 
          function SelectRedirect(){
@@ -148,16 +147,17 @@
         <Option value="NIFTY">NIFTY</option>
         <Option value="BANKNIFTY">BANKNIFTY</option>
         <Option value="FINNIFTY">FINNIFTY</option>
+        <Option value="MIDCPNIFTY">MIDCPNIFTY</option>
     </SELECT>
     <H5 class="container">
-        <a class=" container  badge text-bg-secondary col-md-3" href="#">Nifty Spot Price :
+        <a class=" container  badge text-bg-secondary col-md-3" href="#">BankNifty Spot Price :
             <span th:text="${spotPrice}">Spot Price</span></a>
-        <span class="badge text-bg-primary col-md-2">Lot Size : 50</span>
+        <span class="badge text-bg-primary col-md-2">Lot Size : 25</span>
         <a class=" container  badge text-bg-secondary col-md-2">PCR :
             <span th:text="${pcr}">Spot Price</span></a>
         <!--            <span class="badge text-bg-info" th:text="${pcr}">PCR :  1.25</span>-->
-        <span class="badge text-bg-warning col-md-3">MaxPain Strike :21450</span>
-        <span class="badge text-bg-info col-md-3">Modified MaxPain :21500 </span>
+        <span class="badge text-bg-warning col-md-3">MaxPain Strike :45700</span>
+        <span class="badge text-bg-info col-md-3">Modified MaxPain :45700 </span>
     </H5>
 </div>
 <div id="container" style="width: 1050px; height: 300px; margin: 0 auto"></div>
@@ -183,9 +183,7 @@
             spacingBottom: 0,
             spacingLeft: 0,
         },
-<!--        title: {-->
-<!--            text: 'Nifty'-->
-<!--        },-->
+
         subtitle: {
             text: ''
         },
@@ -194,9 +192,7 @@
             crosshair: true
         },
         yAxis: {
-<!--        chart.yAxis[0].setExtremes(100,300);-->
-<!--            min: [0].set,-->
-<!--            max:100000,-->
+
             title: {
                 text: 'ChangeIn OI'
             }
@@ -226,31 +222,44 @@
         }]
       });
 <!--  ================================-->
-    Highcharts.chart('container', {
-        chart: {
-            type: 'column',
-            spacingTop: 0,
-            spacingRight: 0,
-            spacingBottom: 0,
-            spacingLeft: 0,
+    Highcharts.chart('container',
+    {
+        chart:
+        {
+                type: 'column',
+                spacingTop: 0,
+                spacingRight: 0,
+                spacingBottom: 0,
+                spacingLeft: 0,
         },
-        title: {
-            text: 'Nifty'
-        },
-        subtitle: {
+                 title: {
+                 text: 'Bank Nifty'
+            },
+              subtitle: {
             text: ''
         },
         xAxis: {
+             plotLines: [{
+                color: '#999999',
+                dashStyle: 'Dot',
+                width: 2,
+                label: {
+          align: 'center',       // Horizontal alignment of the label. Can be one of "left", "center" or "right".
+          rotation: null,      // Rotation of the text label in degrees. Defaults to 0 for horizontal plot lines and 90 for vertical lines.
+          text: 'BANKNIFTY ATM Strike' ,          // The text itself. A subset of HTML is supported.
+          textAlign: null,     // The text alignment for the label. While align determines where the texts anchor point is placed within the plot band, textAlign determines how the text is aligned against its anchor point. Possible values are "left", "center" and "right".
+          useHTML: false,      // Whether to use HTML to render the labels.
+          verticalAlign: top,  // Vertical alignment of the label relative to the plot band. Can be one of "top", "middle" or "bottom".
+          x: null,             // Horizontal position relative the alignment.
+          y: null              // Vertical position of the text baseline relative to the alignment.
+        },
+                value: 10,
+            }],
             categories: [[${strikePrice}]],
             crosshair: false
         },
-
-
         yAxis: {
-<!--            min: [0].set,-->
-<!--            max:200000,-->
-<!--            tickInterval: 10000,-->
-            title: {
+                title: {
                 text: 'Open Interest'
             }
         },
@@ -277,8 +286,10 @@
             data: [[${OiCallVal}]],
             color: "#0c7c05"
         }]
-      });
+      },
+      );
     });
+
 
 </script>
 

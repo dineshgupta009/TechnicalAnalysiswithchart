@@ -2,8 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="ISO-8859-1"/>
-    <!--    <link rel="stylesheet"-->
-    <!--          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
           crossorigin="anonymous">
@@ -19,8 +18,7 @@
             crossorigin="anonymous"></script>
     <!-- Option 1: Include in HTML -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-
-    <script language="javascript">
+    <script language="javascript"> <!--src="../static/js/pageChange.js">-->
 
          function SelectRedirect(){
         // ON selection of section this function will work
@@ -39,7 +37,8 @@
         case "FINNIFTY":
         window.location="http://localhost:1255/FinNiftyPage";
           break;
-          case "MIDCPNIFTY":
+
+         case "MIDCPNIFTY":
         window.location="http://localhost:1255/MidCpNiftyPage";
           break;
 
@@ -53,9 +52,10 @@
     </script>
 
 </head>
+
 <body>
 
-<nav class=" navbar navbar-expand-lg navbar-light bg-info ">
+<nav class=" navbar navbar-expand-xl navbar-dark bg-secondary static-top">
     <div class="container">
         <a th:href="@{/symbol}" class="navbar-brand" href="#"> Options Gainer <i class="bi bi-house-fill"></i></a>
 
@@ -131,37 +131,40 @@
                         Education
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownEducationLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#"><i class="bi bi-laptop-fill"></i> How to User</a>
+                        <a class="dropdown-item" href="#"><i class="bi bi-book-fill"></i> Webinars</a>
+                        <a class="dropdown-item" href="#"><i class="bi bi-circle-fill"></i> Blogs</a>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-<div class="container" style="background-color:#d1dbe2">
 
-    <div class="container">
-        <SELECT id="s1" NAME="section" onChange="SelectRedirect();">
-            <Option value="">Select Section</option>
-            <Option value="NIFTY">NIFTY</option>
-            <Option value="BANKNIFTY">BANKNIFTY</option>
-            <Option value="FINNIFTY">FINNIFTY</option>
-        </SELECT>
-        <H5>
-            <span th:text="${spotPrice}" class="badge text-bg-secondary">Spot Price</span>
-            <span class="badge text-bg-info">Future Price : 21520 </span>
-            <span class="badge text-bg-primary">Lot Size : 50</span>
-            <span class="badge text-bg-info">PCR :  1.25</span>
-            <span class="badge text-bg-warning ">MaxPain Strike :21450</span>
-            <span class="badge text-bg-info">Modified MaxPain :21500 </span>
-        </H5>
-    </div>
-    <h2 align="center">Nifty Graph</h2>
-    <div id="container"
-         style="width: 850px; height: 400px; margin: 0 auto"></div>
+<div class="container">
+    <SELECT id="s1" NAME="section" onChange="SelectRedirect();">
+        <Option value="">Select Section</option>
+        <Option value="NIFTY">NIFTY</option>
+        <Option value="BANKNIFTY">BANKNIFTY</option>
+        <Option value="FINNIFTY">FINNIFTY</option>
+        <Option value="MIDCPNIFTY">MIDCPNIFTY</option>
+    </SELECT>
+    <H5 class="container">
+        <a class=" container  badge text-bg-secondary col-md-3" href="#">MidCPNifty Spot Price :
+            <span th:text="${spotPrice}">Spot Price</span></a>
+        <span class="badge text-bg-primary col-md-2">Lot Size : 75</span>
+        <a class=" container  badge text-bg-secondary col-md-2">PCR :
+            <span th:text="${pcr}">Spot Price</span></a>
+        <!--            <span class="badge text-bg-info" th:text="${pcr}">PCR :  1.25</span>-->
+        <span class="badge text-bg-warning col-md-3">MaxPain Strike :10450</span>
+        <span class="badge text-bg-info col-md-3">Modified MaxPain :10500 </span>
+    </H5>
 </div>
+<div id="container" style="width: 1050px; height: 300px; margin: 0 auto"></div>
+<div id="container1" style="width: 1050px; height: 250px; margin: 0 auto"></div>
+</div>
+
+
 <script
         src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
@@ -171,7 +174,8 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script th:inline="javascript">
     $(function(){
-    Highcharts.chart('container', {
+
+    Highcharts.chart('container1', {
         chart: {
             type: 'column',
             spacingTop: 0,
@@ -179,39 +183,18 @@
             spacingBottom: 0,
             spacingLeft: 0,
         },
-        title: {
-            text: 'Nifty'
-        },
+
         subtitle: {
             text: ''
         },
         xAxis: {
-
-         plotLines: [{
-                color: '#999999',
-                dashStyle: 'Dot',
-                width: 2,
-                label: {
-          align: 'center',       // Horizontal alignment of the label. Can be one of "left", "center" or "right".
-          rotation: null,      // Rotation of the text label in degrees. Defaults to 0 for horizontal plot lines and 90 for vertical lines.
-          text: 'NIFTY ATM Strike' ,          // The text itself. A subset of HTML is supported.
-          textAlign: null,     // The text alignment for the label. While align determines where the texts anchor point is placed within the plot band, textAlign determines how the text is aligned against its anchor point. Possible values are "left", "center" and "right".
-          useHTML: false,      // Whether to use HTML to render the labels.
-          verticalAlign: top,  // Vertical alignment of the label relative to the plot band. Can be one of "top", "middle" or "bottom".
-          x: null,             // Horizontal position relative the alignment.
-          y: null              // Vertical position of the text baseline relative to the alignment.
-        },
-                value: 10,
-            }],
-            categories: [[${name}]],
+            categories: [[${strikePrice}]],
             crosshair: true
         },
         yAxis: {
-<!--        chart.yAxis[0].setExtremes(100,300);-->
-            min: [0].set,
-            max:200000,
+
             title: {
-                text: 'Volume'
+                text: 'ChangeIn OI'
             }
         },
         tooltip: {
@@ -230,24 +213,84 @@
         },
         series: [{
             name: 'Put Volume',
-            data: [[${age}]],
-            color: "#10804b"
+            data: [[${putVal}]],
+            color: "#f62f3b"
         },{
             name: 'Call Volume',
-            data: [[${callVol}]],
-            color: "#cc053f"
+            data: [[${callVal}]],
+            color: "#0c7c05"
         }]
       });
+<!--  ================================-->
+    Highcharts.chart('container',
+    {
+        chart:
+        {
+                type: 'column',
+                spacingTop: 0,
+                spacingRight: 0,
+                spacingBottom: 0,
+                spacingLeft: 0,
+        },
+                 title: {
+                 text: 'MidCpNifty'
+            },
+              subtitle: {
+            text: ''
+        },
+        xAxis: {
+             plotLines: [{
+                color: '#999999',
+                dashStyle: 'Dot',
+                width: 2,
+                label: {
+          align: 'center',       // Horizontal alignment of the label. Can be one of "left", "center" or "right".
+          rotation: null,      // Rotation of the text label in degrees. Defaults to 0 for horizontal plot lines and 90 for vertical lines.
+          text: 'MidCpNifty ATM Strike' ,          // The text itself. A subset of HTML is supported.
+          textAlign: null,     // The text alignment for the label. While align determines where the texts anchor point is placed within the plot band, textAlign determines how the text is aligned against its anchor point. Possible values are "left", "center" and "right".
+          useHTML: false,      // Whether to use HTML to render the labels.
+          verticalAlign: top,  // Vertical alignment of the label relative to the plot band. Can be one of "top", "middle" or "bottom".
+          x: null,             // Horizontal position relative the alignment.
+          y: null              // Vertical position of the text baseline relative to the alignment.
+        },
+                value: 20,
+            }],
+            categories: [[${strikePrice}]],
+            crosshair: false
+        },
+        yAxis: {
+                title: {
+                text: 'Open Interest'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} K</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Put Volume',
+            data: [[${OiPutVal}]],
+            color: "#f62f3b"
+        },{
+            name: 'Call Volume',
+            data: [[${OiCallVal}]],
+            color: "#0c7c05"
+        }]
+      },
+
+      );
+
     });
-
-
-
-
-
-
-
-
-
 
 </script>
 
