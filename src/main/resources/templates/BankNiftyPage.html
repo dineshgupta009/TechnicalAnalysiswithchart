@@ -18,7 +18,8 @@
             crossorigin="anonymous"></script>
     <!-- Option 1: Include in HTML -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <script language="javascript"> <!--src="../static/js/pageChange.js">-->
+
+    <script language="javascript">
 
          function SelectRedirect(){
         // ON selection of section this function will work
@@ -46,9 +47,55 @@
         default:
         window.location="http://localhost:1255/index"; // if no selection matches then redirected to home page
         break;
+        }// end of switch
+    }
+
+
+function StocksRedirect(){
+        // ON selection of section this function will work
+        //alert( document.getElementById('s1').value);
+
+        switch(document.getElementById('s2').value)
+        {
+        case "AARTIIND":
+        window.location="http://localhost:1255/AartiIndPage";
+        break;
+
+        case "ABB":
+        window.location="http://localhost:1255/BankNiftyPage";
+        break;
+
+        case "ABBOTINDIA":
+        window.location="http://localhost:1255/FinNiftyPage";
+          break;
+
+         case "ABCAPITAL":
+        window.location="http://localhost:1255/MidCpNiftyPage";
+          break;
+
+        case "ABCAPITAL":
+        window.location="http://localhost:1255/MidCpNiftyPage";
+                    break;
+        case "ABCAPITAL":
+        window.location="http://localhost:1255/MidCpNiftyPage";
+                break;
+        case "ABCAPITAL":
+        window.location="http://localhost:1255/MidCpNiftyPage";
+                 break;
+        case "ABCAPITAL":
+        window.location="http://localhost:1255/MidCpNiftyPage";
+                 break;
+        case "COALINDIA":
+        window.location="http://localhost:1255/CoalIndiaPage";
+                  break;
+
+
+        /// Can be extended to other different selections of SubCategory //////
+        default:
+        window.location="http://localhost:1255/index"; // if no selection matches then redirected to home page
+        break;
 }// end of switch
 }
-
     </script>
 
 </head>
@@ -149,6 +196,195 @@
         <Option value="FINNIFTY">FINNIFTY</option>
         <Option value="MIDCPNIFTY">MIDCPNIFTY</option>
     </SELECT>
+
+    <SELECT id="s2" NAME="section" onChange="StocksRedirect();">
+        <Option value="">Select Section</option>
+        <Option value="AARTIIND">AARTIIND</option>
+        <Option value="ABB">ABB</option>
+        <Option value="ABBOTINDIA">ABBOTINDIA</option>
+        <Option value="ABCAPITAL">ABCAPITAL</option>
+        <Option value="ABFRL">ABFRL</option>
+        <Option value="ACC">ACC</option>
+        <Option value="ADANIENT">ADANIENT</option>
+        <Option value="ADANIPORTS">ADANIPORTS</option>
+        <Option value="ALKEM">ALKEM</option>
+        <Option value="AMBUJACEM">AMBUJACEM</option>
+        <Option value="APOLLOHOSP">APOLLOHOSP</option>
+        <Option value="APOLLOTYRE">APOLLOTYRE</option>
+        <Option value="ASHOKLEY">ASHOKLEY</option>
+        <Option value="ASIANPAINT">ASIANPAINT</option>
+        <Option value="ASTRAL">ASTRAL</option>
+        <Option value="ATUL">ATUL</option>
+        <Option value="AUBANK">AUBANK</option>
+        <Option value="AUROPHARMA">AUROPHARMA</option>
+        <Option value="AXISBANK">AXISBANK</option>
+        <Option value="BAJAJ-AUTO">BAJAJ-AUTO</option>
+        <Option value="BAJAJFINSV">BAJAJFINSV</option>
+        <Option value="BAJFINANCE">BAJFINANCE</option>
+        <Option value="BALKRISIND">BALKRISIND</option>
+        <Option value="BALRAMCHIN">BALRAMCHIN</option>
+        <Option value="BANDHANBNK">BANDHANBNK</option>
+        <Option value="BANKBARODA">BANKBARODA</option>
+        <Option value="BATAINDIA">BATAINDIA</option>
+        <Option value="BEL">BEL</option>
+        <Option value="BERGEPAINT">BERGEPAINT</option>
+        <Option value="BHARATFORG">BHARATFORG</option>
+        <Option value="BHARTIARTL">BHARTIARTL</option>
+        <Option value="BHEL">BHEL</option>
+        <Option value="BIOCON">BIOCON</option>
+        <Option value="BOSCHLTD">BOSCHLTD</option>
+        <Option value="BPCL">BPCL</option>
+        <Option value="BRITANNIA">BRITANNIA</option>
+        <Option value="BSOFT">BSOFT</option>
+        <Option value="CANBK">CANBK</option>
+        <Option value="CANFINHOME">CANFINHOME</option>
+        <Option value="CHAMBLFERT">CHAMBLFERT</option>
+        <Option value="CHOLAFIN">CHOLAFIN</option>
+        <Option value="CIPLA">CIPLA</option>
+        <Option value="COALINDIA">COALINDIA</option>
+        <Option value="COFORGE">COFORGE</option>
+        <Option value="COLPAL">COLPAL</option>
+        <Option value="CONCOR">CONCOR</option>
+        <Option value="COROMANDEL">COROMANDEL</option>
+        <Option value="CROMPTON">CROMPTON</option>
+        <Option value="CUB">CUB</option>
+        <Option value="CUMMINSIND">CUMMINSIND</option>
+        <Option value="DABUR">DABUR</option>
+        <Option value="DALBHARAT">DALBHARAT</option>
+        <Option value="DEEPAKNTR">DEEPAKNTR</option>
+        <Option value="DELTACORP">DELTACORP</option>
+        <Option value="DIVISLAB">DIVISLAB</option>
+        <Option value="DIXON">DIXON</option>
+        <Option value="DLF">DLF</option>
+        <Option value="DRREDDY">DRREDDY</option>
+        Option value="EICHERMOT">EICHERMOT</option>
+        <Option value="ESCORTS">ESCORTS</option>
+        <Option value="EXIDEIND">EXIDEIND</option>
+        <Option value="FEDERALBNK">FEDERALBNK</option>
+        <Option value="GAIL">GAIL</option>
+        <Option value="GLENMARK">GLENMARK</option>
+        <Option value="GMRINFRA">GMRINFRA</option>
+        <Option value="GNFC">GNFC</option>
+        <Option value="GODREJCP">GODREJCP</option>
+        <Option value="GODREJPROP">GODREJPROP</option>
+        <Option value="GRANULES">GRANULES</option>
+        <Option value="GRASIM">GRASIM</option>
+        <Option value="GUJGASLTD">GUJGASLTD</option>
+        <Option value="HAL">HAL</option>
+        <Option value="HAVELLS">HAVELLS</option>
+        <Option value="HCLTECH">HCLTECH</option>
+        <Option value="HDFCAMC">HDFCAMC</option>
+        <Option value="HDFCBANK">HDFCBANK</option>
+        <Option value="HDFCLIFE">HDFCLIFE</option>
+        <Option value="HEROMOTOCO">HEROMOTOCO</option>
+        <Option value="HINDALCO">HINDALCO</option>
+        <Option value="HINDCOPPER">HINDCOPPER</option>
+        <Option value="HINDPETRO">HINDPETRO</option>
+        <Option value="HINDUNILVR">HINDUNILVR</option>
+        <Option value="ICICIBANK">ICICIBANK</option>
+        <Option value="ICICIGI">ICICIGI</option>
+        <Option value="ICICIPRULI">ICICIPRULI</option>
+        <Option value="IDEA">IDEA</option>
+        <Option value="IDFC">IDFC</option>
+        <Option value="IDFCFIRSTB">IDFCFIRSTB</option>
+        <Option value="IEX">IEX</option>
+        <Option value="IGL">IGL</option>
+        <Option value="INDHOTEL">INDHOTEL</option>
+        <Option value="INDIACEM">INDIACEM</option>
+        <Option value="INDIAMART">INDIAMART</option>
+        <Option value="INDIGO">INDIGO</option>
+        <Option value="INDUSINDBK">INDUSINDBK</option>
+        <Option value="INDUSTOWER">INDUSTOWER</option>
+        <Option value="INFY">INFY</option>
+        <Option value="IOC">IOC</option>
+        <Option value="IPCALAB">IPCALAB</option>
+        <Option value="IRCTC">IRCTC</option>
+        <Option value="ITC">ITC</option>
+        <Option value="JINDALSTEL">JINDALSTEL</option>
+        <Option value="JKCEMENT">JKCEMENT</option>
+        <Option value="JSWSTEEL">JSWSTEEL</option>
+        <Option value="JUBLFOOD">JUBLFOOD</option>
+        <Option value="KOTAKBANK">KOTAKBANK</option>
+        <Option value="L&TFH">L&TFH</option>
+        <Option value="LALPATHLAB">LALPATHLAB</option>
+        <Option value="LAURUSLABS">LAURUSLABS</option>
+        <Option value="LICHSGFIN">LICHSGFIN</option>
+        <Option value="LT">LT</option>
+        <Option value="LTIM">LTIM</option>
+        <Option value="LTTS">LTTS</option>
+        <Option value="LUPIN">LUPIN</option>
+        <Option value="M&M">M&M</option>
+        <Option value="M&MFIN">M&MFIN</option>
+        <Option value="MANAPPURAM">MANAPPURAM</option>
+        <Option value="MARICO">MARICO</option>
+        <Option value="MARUTI">MARUTI</option>
+        <Option value="MCDOWELL-N">MCDOWELL-N</option>
+        <Option value="MCX">MCX</option>
+        <Option value="METROPOLIS">METROPOLIS</option>
+        <Option value="MFSL">MFSL</option>
+        <Option value="MGL">MGL</option>
+        <Option value="MOTHERSON">MOTHERSON</option>
+        <Option value="MPHASIS">MPHASIS</option>
+        <Option value="MRF">MRF</option>
+        <Option value="MUTHOOTFIN">MUTHOOTFIN</option>
+        <Option value="NATIONALUM">NATIONALUM</option>
+        <Option value="NAUKRI">NAUKRI</option>
+        <Option value="NAVINFLUOR">NAVINFLUOR</option>
+        <Option value="NESTLEIND">NESTLEIND</option>
+        <Option value="NMDC">NMDC</option>
+        <Option value="NTPC">NTPC</option>
+        <Option value="OBEROIRLTY">OBEROIRLTY</option>
+        <Option value="OFSS">OFSS</option>
+        <Option value="ONGC">ONGC</option>
+        <Option value="PAGEIND">PAGEIND</option>
+        <Option value="PEL">PEL</option>
+        <Option value="PERSISTENT">PERSISTENT</option>
+        <Option value="PETRONET">PETRONET</option>
+        <Option value="PFC">PFC</option>
+        <Option value="PIDILITIND">PIDILITIND</option>
+        <Option value="PIIND">PIIND</option>
+        <Option value="PNB">PNB</option>
+        <Option value="POLYCAB">POLYCAB</option>
+        <Option value="POWERGRID">POWERGRID</option>
+        <Option value="PVRINOX">PVRINOX</option>
+        <Option value="RAMCOCEM">RAMCOCEM</option>
+        <Option value="RBLBANK">RBLBANK</option>
+        <Option value="RECLTD">RECLTD</option>
+        <Option value="RELIANCE">RELIANCE</option>
+        <Option value="SAIL">SAIL</option>
+        <Option value="SBICARD">SBICARD</option>
+        <Option value="SBILIFE">SBILIFE</option>
+        <Option value="SBIN">SBIN</option>
+        <Option value="SHREECEM">SHREECEM</option>
+        <Option value="SHRIRAMFIN">SHRIRAMFIN</option>
+        <Option value="SIEMENS">SIEMENS</option>
+        <Option value="SRF">SRF</option>
+        <Option value="SUNPHARMA">SUNPHARMA</option>
+        <Option value="SUNTV">SUNTV</option>
+        <Option value="SYNGENE">SYNGENE</option>
+        <Option value="TATACHEM">TATACHEM</option>
+        <Option value="TATACOMM">TATACOMM</option>
+        <Option value="TATACONSUM">TATACONSUM</option>
+        <Option value="TATAMOTORS">TATAMOTORS</option>
+        <Option value="TATAPOWER">TATAPOWER</option>
+        <Option value="TATASTEEL">TATASTEEL</option>
+        <Option value="TCS">TCS</option>
+        <Option value="TECHM">TECHM</option>
+        <Option value="TITAN">TITAN</option>
+        <Option value="TORNTPHARM">TORNTPHARM</option>
+        <Option value="TRENT">TRENT</option>
+        <Option value="TVSMOTOR">TVSMOTOR</option>
+        <Option value="UBL">UBL</option>
+        <Option value="ULTRACEMCO">ULTRACEMCO</option>
+        <Option value="UPL">UPL</option>
+        <Option value="VEDL">VEDL</option>
+        <Option value="VOLTAS">VOLTAS</option>
+        <Option value="WIPRO">WIPRO</option>
+        <Option value="ZEEL">ZEEL</option>
+        <Option value="ZYDUSLIFE">ZYDUSLIFE</option>
+
+    </SELECT>
+
     <H5 class="container">
         <a class=" container  badge text-bg-secondary col-md-3" href="#">BankNifty Spot Price :
             <span th:text="${spotPrice}">Spot Price</span></a>
@@ -184,9 +420,12 @@
             spacingLeft: 0,
         },
 
-        subtitle: {
-            text: ''
-        },
+             title: {
+                 text: ' '
+            },
+<!--        subtitle: {-->
+<!--            text: ' '-->
+<!--        },-->
         xAxis: {
             categories: [[${strikePrice}]],
             crosshair: true
@@ -289,6 +528,7 @@
       },
       );
     });
+
 
 
 </script>

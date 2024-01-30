@@ -92,4 +92,9 @@ public class test {
     public String builderPage(){
         return "builder";
     }
+
+    @GetMapping("/test3")
+    public String test(){
+        return "test3";
+    }
 }

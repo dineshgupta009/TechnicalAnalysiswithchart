@@ -19,7 +19,6 @@
     <!-- Option 1: Include in HTML -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
-
     <script language="javascript">
 
          function SelectRedirect(){
@@ -52,7 +51,6 @@
     }
 
 
-
 function StocksRedirect(){
         // ON selection of section this function will work
         //alert( document.getElementById('s1').value);
@@ -64,7 +62,7 @@ function StocksRedirect(){
         break;
 
         case "ABB":
-        window.location="http://localhost:1255/BankNiftyPage";
+        window.location="http://localhost:1255/AbbPage";
         break;
 
         case "ABBOTINDIA":
@@ -98,10 +96,11 @@ function StocksRedirect(){
         break;
 }// end of switch
 }
+
     </script>
 
-</head>
 
+</head>
 <body>
 
 <nav class=" navbar navbar-expand-xl navbar-dark bg-secondary static-top">
@@ -197,6 +196,7 @@ function StocksRedirect(){
         <Option value="BANKNIFTY">BANKNIFTY</option>
         <Option value="FINNIFTY">FINNIFTY</option>
         <Option value="MIDCPNIFTY">MIDCPNIFTY</option>
+
     </SELECT>
 
     <SELECT id="s2" NAME="section" onChange="StocksRedirect();">
@@ -386,6 +386,8 @@ function StocksRedirect(){
         <Option value="ZYDUSLIFE">ZYDUSLIFE</option>
 
     </SELECT>
+
+
     <H5 class="container">
         <a class=" container  badge text-bg-secondary col-md-3" href="#">Nifty Spot Price :
             <span th:text="${spotPrice}">Spot Price</span></a>
@@ -420,16 +422,36 @@ function StocksRedirect(){
             spacingBottom: 0,
             spacingLeft: 0,
         },
-
-        subtitle: {
+        title: {
             text: ' '
         },
+        subtitle: {
+            text: ''
+        },
         xAxis: {
+         plotLines: [{
+                color: '#999999',
+                dashStyle: 'Dot',
+                width: 2,
+                label: {
+          align: 'center',       // Horizontal alignment of the label. Can be one of "left", "center" or "right".
+          rotation: null,      // Rotation of the text label in degrees. Defaults to 0 for horizontal plot lines and 90 for vertical lines.
+          text: 'NIFTY ATM Strike' ,          // The text itself. A subset of HTML is supported.
+          textAlign: null,     // The text alignment for the label. While align determines where the texts anchor point is placed within the plot band, textAlign determines how the text is aligned against its anchor point. Possible values are "left", "center" and "right".
+          useHTML: false,      // Whether to use HTML to render the labels.
+          verticalAlign: top,  // Vertical alignment of the label relative to the plot band. Can be one of "top", "middle" or "bottom".
+          x: null,             // Horizontal position relative the alignment.
+          y: null              // Vertical position of the text baseline relative to the alignment.
+        },
+                value: 10,
+            }],
             categories: [[${strikePrice}]],
             crosshair: true
         },
         yAxis: {
-
+<!--        chart.yAxis[0].setExtremes(100,300);-->
+<!--            min: [0].set,-->
+<!--            max:100000,-->
             title: {
                 text: 'ChangeIn OI'
             }
@@ -459,24 +481,22 @@ function StocksRedirect(){
         }]
       });
 <!--  ================================-->
-    Highcharts.chart('container',
-    {
-        chart:
-        {
-                type: 'column',
-                spacingTop: 0,
-                spacingRight: 0,
-                spacingBottom: 0,
-                spacingLeft: 0,
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column',
+            spacingTop: 0,
+            spacingRight: 0,
+            spacingBottom: 0,
+            spacingLeft: 0,
         },
-                 title: {
-                 text: 'Nifty'
-            },
-              subtitle: {
+        title: {
+            text: 'FinNifty'
+        },
+        subtitle: {
             text: ''
         },
         xAxis: {
-             plotLines: [{
+         plotLines: [{
                 color: '#999999',
                 dashStyle: 'Dot',
                 width: 2,
@@ -495,8 +515,13 @@ function StocksRedirect(){
             categories: [[${strikePrice}]],
             crosshair: false
         },
+
+
         yAxis: {
-                title: {
+<!--            min: [0].set,-->
+<!--            max:200000,-->
+<!--            tickInterval: 10000,-->
+            title: {
                 text: 'Open Interest'
             }
         },
@@ -523,13 +548,8 @@ function StocksRedirect(){
             data: [[${OiCallVal}]],
             color: "#0c7c05"
         }]
-      },
-
-      );
-
+      });
     });
-
-
 
 </script>
 
