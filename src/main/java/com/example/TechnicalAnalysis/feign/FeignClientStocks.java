@@ -82,5 +82,7 @@ public interface FeignClientStocks {
 
     @GetMapping("/api/option-chain-equities?symbol=ABB")
     public NSE getLiveABBData(@RequestHeader Map<String, String> headerMap1);
+    @GetMapping("/api/option-chain-equities?symbol=GUJGASLTD")
+    public NSE getLiveGUJGASLTDData(@RequestHeader Map<String, String> headerMap1);
 
 }

@@ -20,23 +20,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
     <style>
-        .arrow {
-            font-size: 50px;
-            font-weight: bold;
-        }
-        .up-arrow {
-            color: green;
-        }
-        .down-arrow {
-            color: red;
-        }
 
-
-
-
-
-    </style>
-    <style>
 /* Popup container - can be anything you want */
 .popup {
   position: relative;
@@ -47,7 +31,6 @@
   -ms-user-select: none;
   user-select: none;
 }
-
 
 /* The actual popup */
 .popup .popuptext {
@@ -98,13 +81,6 @@
 }
 
 
-
-
-
-
-
-
-
     </style>
 
     <script language="javascript">
@@ -138,12 +114,13 @@
         }// end of switch
     }
 
-
     function myFunction() {
-        var popup = document.getElementById("myPopup");
-        popup.classList.toggle("show");
-         }
-     function StocksRedirect(){
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+
+
+function StocksRedirect(){
         // ON selection of section this function will work
         //alert( document.getElementById('s1').value);
 
@@ -189,16 +166,10 @@
 }// end of switch
 }
 
-
-
-
-
-
-
     </script>
 
-</head>
 
+</head>
 <body>
 
 <nav class=" navbar navbar-expand-xl navbar-dark bg-secondary static-top">
@@ -294,6 +265,7 @@
         <Option value="BANKNIFTY">BANKNIFTY</option>
         <Option value="FINNIFTY">FINNIFTY</option>
         <Option value="MIDCPNIFTY">MIDCPNIFTY</option>
+
     </SELECT>
 
     <SELECT id="s2" NAME="section" onChange="StocksRedirect();">
@@ -486,39 +458,30 @@
 
     <a onclick="myFunction()" class=" container  badge text-bg-secondary col-md-2 popup">Buy Sell Range
         <form class=" container popuptext" id="myPopup">
-            <div class=" container col-md-2 ">
-                <div th:if="${upDown}">
-                    <span class="arrow up-arrow col-md-2 ">&#8593;</span> <!-- Up arrow -->
-                    <label>With Iv</label>
-                </div>
-                <div th:unless="${upDown}">
-                    <span class="arrow down-arrowcol-md-2 ">&#8595;</span> <!-- Down arrow -->
-                    <label>With Iv</label>
-                </div>
-                <br>
-                <div th:if="${pcr > 1}">
-                    <span class="arrow up-arrow col-md-2 ">&#8593;</span> <!-- Up arrow symbol -->
-                    <label>With PCR</label>
-                </div>
-                <div th:unless="${pcr > 1}">
-                    <span class="arrow down-arrow col-md-2 ">&#8595;</span> <!-- Down arrow symbol -->
-                    <label>With PCR</label>
-                </div>
-
-            </div>
+            <label>spot price </label>
+        <span  th:text="${spotPrice}">A Simple Popup!</span><br>
+            <label>spot price </label>
+        <span  th:text="${spotPrice}">A Simple Popup!</span><br>
+            <label>spot price </label>
+        <span  th:text="${spotPrice}">A Simple Popup!</span><br>
+            <label>spot price </label>
+        <span  th:text="${spotPrice}">A Simple Popup!</span><br>
+            <label>spot price </label>
+        <span  th:text="${spotPrice}">A Simple Popup!</span>
 
         </form>
     </a>
+
+
     <H5 class="container">
-        <a class=" container  badge text-bg-secondary col-md-3" href="#">Nifty Spot Price :
+        <a class=" container  badge text-bg-secondary col-md-3" href="#">AartiInd Spot Price :
             <span th:text="${spotPrice}">Spot Price</span></a>
-        <span class="badge text-bg-primary col-md-2">Lot Size : 50</span>
-        <span class="badge text-bg-warning col-md-3">Futures Price: :22097.8</span>
+        <span class="badge text-bg-primary col-md-2">Lot Size : 1000</span>
         <a class=" container  badge text-bg-secondary col-md-2">PCR :
             <span th:text="${pcr}">Spot Price</span></a>
         <!--            <span class="badge text-bg-info" th:text="${pcr}">PCR :  1.25</span>-->
-        <span class="badge text-bg-warning col-md-3">MaxPain Strike :22000</span>
-        <span class="badge text-bg-info col-md-3">Modified MaxPain :21834 </span>
+        <span class="badge text-bg-warning col-md-3">MaxPain Strike :21450</span>
+        <span class="badge text-bg-info col-md-3">Modified MaxPain :21500 </span>
     </H5>
 </div>
 <div id="container" style="width: 1050px; height: 300px; margin: 0 auto"></div>
@@ -544,16 +507,36 @@
             spacingBottom: 0,
             spacingLeft: 0,
         },
-
-        subtitle: {
+        title: {
             text: ' '
         },
+        subtitle: {
+            text: ''
+        },
         xAxis: {
+         plotLines: [{
+                color: '#999999',
+                dashStyle: 'Dot',
+                width: 2,
+                label: {
+          align: 'center',       // Horizontal alignment of the label. Can be one of "left", "center" or "right".
+          rotation: null,      // Rotation of the text label in degrees. Defaults to 0 for horizontal plot lines and 90 for vertical lines.
+          text: 'NIFTY ATM Strike' ,          // The text itself. A subset of HTML is supported.
+          textAlign: null,     // The text alignment for the label. While align determines where the texts anchor point is placed within the plot band, textAlign determines how the text is aligned against its anchor point. Possible values are "left", "center" and "right".
+          useHTML: false,      // Whether to use HTML to render the labels.
+          verticalAlign: top,  // Vertical alignment of the label relative to the plot band. Can be one of "top", "middle" or "bottom".
+          x: null,             // Horizontal position relative the alignment.
+          y: null              // Vertical position of the text baseline relative to the alignment.
+        },
+                value: 10,
+            }],
             categories: [[${strikePrice}]],
             crosshair: true
         },
         yAxis: {
-
+<!--        chart.yAxis[0].setExtremes(100,300);-->
+<!--            min: [0].set,-->
+<!--            max:100000,-->
             title: {
                 text: 'ChangeIn OI'
             }
@@ -583,24 +566,22 @@
         }]
       });
 <!--  ================================-->
-    Highcharts.chart('container',
-    {
-        chart:
-        {
-                type: 'column',
-                spacingTop: 0,
-                spacingRight: 0,
-                spacingBottom: 0,
-                spacingLeft: 0,
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column',
+            spacingTop: 0,
+            spacingRight: 0,
+            spacingBottom: 0,
+            spacingLeft: 0,
         },
-                 title: {
-                 text: 'Nifty'
-            },
-              subtitle: {
+        title: {
+            text: 'FinNifty'
+        },
+        subtitle: {
             text: ''
         },
         xAxis: {
-             plotLines: [{
+         plotLines: [{
                 color: '#999999',
                 dashStyle: 'Dot',
                 width: 2,
@@ -619,8 +600,13 @@
             categories: [[${strikePrice}]],
             crosshair: false
         },
+
+
         yAxis: {
-                title: {
+<!--            min: [0].set,-->
+<!--            max:200000,-->
+<!--            tickInterval: 10000,-->
+            title: {
                 text: 'Open Interest'
             }
         },
@@ -647,16 +633,8 @@
             data: [[${OiCallVal}]],
             color: "#0c7c05"
         }]
-      },
-
-      );
-
+      });
     });
-
-
-
-
-
 
 
 

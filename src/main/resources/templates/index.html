@@ -132,10 +132,18 @@
         </div>
     </div>
 </nav>
+
+<div>
+    <h6>
+        <a>Market Status </a>
+        <a th:text="${status1.status}">Nifty-Chart</a>
+    </h6>
+</div>
 <div style="position: static ;background-color:#d1dbe2">
     <div class="left">Nifty : <span id="nifty"></span>
         <a th:href="@{/BankNiftyPage}">BaniNifty-Chart</a>
         <a th:href="@{/NiftyPage}">Nifty-Chart</a>
+
     </div>
 
     <div class="right">
@@ -454,6 +462,9 @@
 		{
 		    return new Promise(resolve => setTimeout(resolve, milliSeconds));
 		}
+
+
+
 
 
 </script>
