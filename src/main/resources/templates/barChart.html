@@ -21,7 +21,7 @@
 
     <style>
         .arrow {
-            font-size: 50px;
+            font-size: 30px;
             font-weight: bold;
         }
         .up-arrow {
@@ -30,10 +30,6 @@
         .down-arrow {
             color: red;
         }
-
-
-
-
 
     </style>
     <style>
@@ -96,14 +92,6 @@
   from {opacity: 0;}
   to {opacity:1 ;}
 }
-
-
-
-
-
-
-
-
 
     </style>
 
@@ -188,6 +176,11 @@
         break;
 }// end of switch
 }
+
+
+
+
+
 
 
 
@@ -486,25 +479,36 @@
 
     <a onclick="myFunction()" class=" container  badge text-bg-secondary col-md-2 popup">Buy Sell Range
         <form class=" container popuptext" id="myPopup">
-            <div class=" container col-md-2 ">
-                <div th:if="${upDown}">
+
+            <div class=" container  row ">
+                <div class="col p-3  text-white" th:if="${upDown} ">
                     <span class="arrow up-arrow col-md-2 ">&#8593;</span> <!-- Up arrow -->
                     <label>With Iv</label>
                 </div>
-                <div th:unless="${upDown}">
+                <div class="col p-3  text-white" th:unless="${upDown}">
                     <span class="arrow down-arrowcol-md-2 ">&#8595;</span> <!-- Down arrow -->
                     <label>With Iv</label>
                 </div>
-                <br>
-                <div th:if="${pcr > 1}">
+
+                <div class="col p-3  text-white" th:if="${pcr > 1}">
                     <span class="arrow up-arrow col-md-2 ">&#8593;</span> <!-- Up arrow symbol -->
                     <label>With PCR</label>
                 </div>
-                <div th:unless="${pcr > 1}">
+                <div class="col p-3 text-white" th:unless="${pcr > 1}">
                     <span class="arrow down-arrow col-md-2 ">&#8595;</span> <!-- Down arrow symbol -->
                     <label>With PCR</label>
                 </div>
+            </div>
 
+            <div class=" container  row ">
+                <div class="row  ">
+                    <label text-body>Support Levels PUT Side</label>
+                    <div class="col  text-white" th:each="item : ${SupportPut}" th:text="${item}"></div>
+                </div>
+                <div class="row">
+                    <label text-body>Support Levels CALL Side</label>
+                    <div class="col text-white" th:each="item : ${SupportCall}" th:text="${item}"></div>
+                </div>
             </div>
 
         </form>
@@ -652,6 +656,11 @@
       );
 
     });
+
+
+
+
+
 
 
 

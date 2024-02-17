@@ -8,6 +8,7 @@ import com.example.TechnicalAnalysis.entity.marketStatus.Status;
 import com.example.TechnicalAnalysis.feign.*;
 import com.example.TechnicalAnalysis.processor.NSEDataProcessor;
 import com.example.TechnicalAnalysis.processor.StocksDataProcessor;
+import com.sun.source.tree.Tree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -138,19 +139,40 @@ public class DailyAnalysis {
 
         boolean data1 = Arrays.asList(nse.getFiltered().getData()).stream()
                 .filter(data -> (data.getStrikePrice() == (currentStrike)))
-                .peek(e->System.out.println("Filtered value: " + e))
                 .allMatch(data -> data.getPe().getImpliedVolatility() > data.getCe().getImpliedVolatility());
 
-
-        System.out.println(data1);
         model.addAttribute("upDown", data1);
+
         for (Data data : records) {
             putVal.put(data.getStrikePrice(), (data.getPe().getChangeinOpenInterest()));
             callVal.put(data.getStrikePrice(), (data.getCe().getChangeinOpenInterest()));
             OiPutVal.put(data.getStrikePrice(), (data.getPe().getOpenInterest()));
             OiCallVal.put(data.getStrikePrice(), (data.getCe().getOpenInterest()));
         }
+//        getting both key and value for highest 3 volume
 
+        Map<Double, Double> HigPut = OiPutVal.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .limit(3)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        System.out.println("Put Val " + HigPut);
+        TreeSet<Double> higPutKey = new TreeSet<>(HigPut.keySet());
+        System.out.println(higPutKey);
+        model.addAttribute("SupportPut" ,higPutKey);
+
+
+
+        Map<Double, Double> HigCall = OiCallVal.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .limit(3)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        System.out.println("Call Val " + HigCall);
+        TreeSet<Double> higCallKey = new TreeSet<>(HigCall.keySet());
+        System.out.println(higPutKey);
+        model.addAttribute("SupportCall" ,higCallKey);
+
+//        Getting list of Strike price
         Set<Double> keySet = putVal.keySet();
         List<Double> strikePrice = new LinkedList<>(keySet);
         System.out.println(putVal.keySet());
